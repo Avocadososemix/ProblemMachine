@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package problemmachine2017.problemmachine;
+package problemmachine;
+
+import problemmachine.matematiikka.Matikka;
 
 /**
  *
@@ -11,5 +13,15 @@ package problemmachine2017.problemmachine;
  */
 public class Main {
     
-    public static void main(String[] args) {}
+    public static void main(String[] args) {
+    
+    Matikka matsku = new Matikka();
+    matsku.lueTiedosto();
+    
+    
+    }
+    
+    
+    
+    
 }
