@@ -5,6 +5,7 @@
  */
 package problemmachine.matematiikka;
 
+import problemmachine.tehtavat.Tehtavat;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -31,7 +32,7 @@ public class MatikkaTest {
 
     @Before
     public void setUp() {
-        Matikka matematiikka = new Matikka();
+        Tehtavat matematiikka = new Tehtavat();
     }
 
     @After
@@ -83,8 +84,8 @@ public class MatikkaTest {
      */
     @Test
     public void testAnnaSattumanvarainenInt() {
-        Matikka matematiikka = new Matikka();
-        int muuttuja =matematiikka.annaSattumanvarainenInt(1);
+        Tehtavat matematiikka = new Tehtavat();
+        int muuttuja =matematiikka.valitseSattumanvarainenTehtava(1);
         assertTrue(0 <= muuttuja && muuttuja <= 1);
     }
 }

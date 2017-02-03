@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package problemmachine.matematiikka;
+package problemmachine.tehtavat;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -15,20 +15,11 @@ import java.util.Scanner;
  *
  * @author lkaranko
  */
-public class Matikka {
+public class Tehtavat {
 
     List<String> tehtavalista = new ArrayList();
     List<Integer> tehdytTehtavat = new ArrayList();
 
-//
-//    public String trigonometria() {
-//        System.out.println("Mikä on kolmion ");
-//    }
-//
-//    public String flavourText() {
-//
-//    }
-//
     public void lueTiedosto() {
         InputStream inputti = getClass().getResourceAsStream("kysymykset.txt");
         Scanner lukija = new Scanner(inputti);
@@ -40,16 +31,12 @@ public class Matikka {
     }
 
     public String valitseSattumanvarainenTehtava() {
-        return tehtavalista.get(annaSattumanvarainenInt(tehtavalista.size() - 1));
+        return tehtavalista.get(valitseSattumanvarainenTehtava(tehtavalista.size() - 1));
     }
 
     public String valitseTehtava(int tehtavanro) {
         return tehtavalista.get(tehtavanro);
     }
-//    
-//    public String paloitaTehtava() {
-//        
-//    }
 
     public double annaSattumanvarainenDouble(int min, int max) {
         Random r = new Random();
@@ -57,9 +44,14 @@ public class Matikka {
         return randomLuku;
     }
 
-    public int annaSattumanvarainenInt(int max) {
+    public int valitseSattumanvarainenTehtava(int max) {
         Random r = new Random();
         int randomLuku = r.nextInt(max);
+        if (tehdytTehtavat.contains(randomLuku) && tehdytTehtavat.size() != tehtavalista.size()) {
+            //tässä pienennetään todennäköisyyttä että saadaan uudestaan jo tehty tehtävä.
+            //Kun kaikki tehtävät on jo tehty, tätä iffiä ei sovelleta enää.
+            randomLuku = r.nextInt(max);
+        }
         return randomLuku;
     }
 

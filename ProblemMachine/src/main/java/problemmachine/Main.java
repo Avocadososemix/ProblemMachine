@@ -5,23 +5,23 @@
  */
 package problemmachine;
 
-import problemmachine.matematiikka.Matikka;
+import problemmachine.logiikka.Logiikka;
+import problemmachine.tehtavat.Tehtavat;
 
 /**
  *
  * @author lkaranko
  */
 public class Main {
-    
+
     public static void main(String[] args) {
-    
-    Matikka matsku = new Matikka();
-    matsku.lueTiedosto();
-    
-    
+
+        Tehtavat matsku = new Tehtavat();
+        Logiikka logic = new Logiikka();
+        
+        matsku.lueTiedosto();
+        logic.haeTehtava();
+
     }
-    
-    
-    
-    
+
 }

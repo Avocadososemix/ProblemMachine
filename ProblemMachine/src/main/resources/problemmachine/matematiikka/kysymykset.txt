@@ -1,4 +1,0 @@
-Kuinka kaukana avaruusalus om maan pinnasta,kun maapallo näkyy aluksesta ((1-90)) asteen kulmassa ? maan säde on 6370 km. || Vastaus || Vastaus ja selitys.
-Sinulla on ((2-30)) kenkää, montako muurahaista pystyt kengittämään? || Vastaus ((2-30))/6 || Muurahaisella on 3 jalkaparia, joten vastaus saadaan jakamalla kenkien lukumäärä kuudella. || 
-
-Avaruusalus on ((vastaus)) päässä maan pinnasta. /n/n 
