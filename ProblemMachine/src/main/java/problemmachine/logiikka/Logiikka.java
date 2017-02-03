@@ -5,6 +5,7 @@
  */
 package problemmachine.logiikka;
 
+import java.util.ArrayList;
 import java.util.Random;
 import problemmachine.tehtavat.Tehtavat;
 
@@ -21,6 +22,8 @@ public class Logiikka {
     private double A;
     private double B;
     private double C;
+    private ArrayList<Object> muuttujat = new ArrayList<>();
+    muuttujat.get(1)
 
     private String kysymys;
     private int vastaus;
@@ -58,9 +61,15 @@ public class Logiikka {
 
         }
         //säädä vielä
+        for ()
+        try {
         A = muuttujat[0];
         B = muuttujat[1];
         C = muuttujat[2];
+        
+        } catch (ArrayIndexOutofBoundsException) {
+            ArrayList<Object>
+        }
     }
 
     /**
