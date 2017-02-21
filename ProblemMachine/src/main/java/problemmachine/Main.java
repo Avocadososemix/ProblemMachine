@@ -19,15 +19,14 @@ public class Main {
 
         Logiikka logic = new Logiikka();
         Kayttoliittyma kayttis = new Kayttoliittyma(logic);
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 kayttis.setVisible(true);
             }
         });
-        
-//        System.out.println("Uusi logiikka luotu");
 
+//        System.out.println("Uusi logiikka luotu");
         //kysymyksetMatematiikka.txt
         //kysymyksetFysiikka.txt
         //kysymyksetKemia.txt
@@ -38,8 +37,9 @@ public class Main {
 //        System.out.println(logic.getKysymysMuuttujilla());
 //        System.out.println(logic.getVastausMuuttujilla());
 //        System.out.println("Laajavastaus");
+//System.out.println("moi!");
 //        System.out.println(logic.getLaajaVastausMuuttujilla());
-
+//
+//    }
     }
-
 }

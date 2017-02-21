@@ -11,7 +11,6 @@ import java.util.HashMap;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import static jdk.nashorn.internal.objects.NativeMath.round;
 import problemmachine.tehtavat.Tehtavat;
 
 /**
@@ -27,7 +26,7 @@ public class Logiikka {
     private String vastaus;
     private String laajaVastaus;
 
-    private int muuttujienlkm;
+    private int muuttujienlkm = 0;
     private int oikeatVastaukset = 0;
     private int vaaratVastaukset = 0;
 
@@ -51,6 +50,7 @@ public class Logiikka {
     //tässä pitäisi estää käyttäjän hakemasta tehtävänumeroilla joilla ei löydy
     //tehtäviä. Käytetään getTehtavienLkmListalla() metodia.
     public void haeTehtava(int tehtavanro) {
+        vastaus = "$";
         System.out.println("Tehtavan haku arvolla " + tehtavanro);
         paloitteleTehtava(tehtava.valitseTehtava(tehtavanro));
 
@@ -70,10 +70,12 @@ public class Logiikka {
         System.out.println("-vastaus määritelty");
         laajaVastaus = osat[2];
         System.out.println("-laajavastaus määritelty");
+        if (!osat[3].trim().isEmpty()) {
         osat = osat[3].split(",");
         muuttujienlkm = osat.length;
         System.out.println("-muuttujienlkm määritelty");
         annetaanSattumanvaraiset(osat);
+        }
 
     }
 
@@ -131,33 +133,39 @@ public class Logiikka {
     }
 
     public String getVastausMuuttujilla() {
+        if (!vastaus.contains("$")) {
+            return vastaus;
+        }
         format.setDecimalSeparatorAlwaysShown(false);
         for (char i = 0; i < muuttujienlkm; i++) {
             vastaus = vastaus.replace("$" + (char) ('A' + i), muuttujat.get((char) ('A' + i)).toString());
         }
-        return laskin(vastaus).toString();
+        return laskin(vastaus);
     }
 
     public String getLaajaVastaus() {
         return laajaVastaus;
     }
 
-    public Object getLaajaVastausMuuttujilla() {
+    public String getLaajaVastausMuuttujilla() {
         for (char i = 0; i < muuttujienlkm; i++) {
             laajaVastaus = laajaVastaus.replace("$" + (char) ('A' + i), muuttujat.get((char) ('A' + i)).toString());
         }
 
-        return laskin(laajaVastaus.trim());
+        return (laajaVastaus.trim());
     }
 
     public boolean tarkistaVastaus(String annettuvastaus) {
-        String vastausInt = (annettuvastaus);
-        if (vastausInt == vastaus) {
+        System.out.println("Annettu vastaus on " + annettuvastaus);
+        System.out.println("Oikea vastaus on " + getVastausMuuttujilla());
+        String vastausTrim = annettuvastaus.trim();
+        if (vastausTrim.equals(getVastausMuuttujilla().trim())) {
             oikeatVastaukset++;
+            return true;
         } else {
             vaaratVastaukset++;
+            return false;
         }
-        return vastausInt == vastaus;
     }
 
     public String laskin(String input) {
@@ -165,13 +173,15 @@ public class Logiikka {
         format.setRoundingMode(RoundingMode.CEILING);
 //        System.out.println("Aluksi input on " + input);
         try {
-            ScriptEngineManager mgr = new ScriptEngineManager();
-            ScriptEngine engine = mgr.getEngineByName("JavaScript");
+            ScriptEngineManager manageri = new ScriptEngineManager();
+            ScriptEngine engine = manageri.getEngineByName("JavaScript");
             String palaute = engine.eval(input).toString();
             if (palaute.contains(".")) {
-                return format.format(Double.parseDouble(palaute));
+                vastaus = format.format(Double.parseDouble(palaute));
+                return vastaus;
             } else {
-                return palaute;
+                vastaus = palaute;
+                return vastaus;
             }
         } catch (ScriptException | NumberFormatException e) {
             System.out.println(e);

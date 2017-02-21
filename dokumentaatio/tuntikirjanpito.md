@@ -8,5 +8,11 @@ Päivä | Tunnit | Kuvaus
 01.02.2017 | 3h | Muutan logiikkaa sekä metodien ja luokkien nimiä johdonmukaisemmiksi.
 03.02.2017 | 2h | Luon luokan johon tallennetaan tehtävissä esiintyvien kysymysten muuttujat ja mahdollistan molempien int/double käytön muuttujissa. 
 03.02.2017 | 1h | Ohjelman logiikka on melkein valmis. Nyt on mahdollista kutsua tehtäviä ja vastauksia niiden muuttujilla höystettyinä.
+07.02.2017 | 3h | Loin testejä ja taistelin Mavenin kanssa. Git-ongelmia.
+10.02.2017 | 2h | Yritin muuttaa logiikkaa joka palauttaa vastauksia, siten että vastaukset palautuvat järkevämmän näköisinä.
+15.02.2017 | 2h | Siistin ohjelman rakennetta, poistin turhia metodeja, hieman lisää logiikan hiomista.
+19.02.2017 | 6h | Opettelin graafisen käyttöliittymän luontia.
+20.02.2017 | 4h | Alkeellinen versio graafisesta käyttöliittymästä on valmis, päädyin paljon päänvaivan jälkeen käyttämään valmista designeria. Paransin tapaa kirjoittaa uusia tehtäviä järjestelmään. Tein testejä.
+21.02.2017 | 7h | Sain graafisen käyttöliittymän toimintakuntoon, vielä pitää lisätä tehtäviä lisää ja muuttaa hieman mallivastauksen toteutusta.
 ... | ... | ...
 

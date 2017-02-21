@@ -32,6 +32,8 @@ public class Tehtavat {
     
 
     public void lueTiedosto(String lahdetiedosto) {
+        tehtavalista.clear();
+        tehdytTehtavat.clear();
         InputStream inputti = getClass().getResourceAsStream(lahdetiedosto);
         Scanner lukija = new Scanner(inputti);
         while (lukija.hasNextLine()) {
@@ -43,7 +45,7 @@ public class Tehtavat {
 
     public String valitseSattumanvarainenTehtava() {
         System.out.println("Valitaan satunnainen tehtävä");
-        return tehtavalista.get(valitseSattumanvarainenTehtavaLogiikka(tehtavalista.size() - 1));
+        return tehtavalista.get(valitseSattumanvarainenTehtavaLogiikka(tehtavalista.size()));
     }
 
     public String valitseTehtava(int tehtavanro) {
