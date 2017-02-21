@@ -19,9 +19,20 @@ public class Tehtavat {
 
     List<String> tehtavalista = new ArrayList();
     List<Integer> tehdytTehtavat = new ArrayList();
+    Random r;
 
-    public void lueTiedosto() {
-        InputStream inputti = getClass().getResourceAsStream("kysymykset.txt");
+    public Tehtavat(Random r) {
+        this.r = r;
+    }
+    
+    public Tehtavat() {
+        this(new Random());
+    }
+    
+    
+
+    public void lueTiedosto(String lahdetiedosto) {
+        InputStream inputti = getClass().getResourceAsStream(lahdetiedosto);
         Scanner lukija = new Scanner(inputti);
         while (lukija.hasNextLine()) {
             String rivi = lukija.nextLine();
@@ -31,21 +42,22 @@ public class Tehtavat {
     }
 
     public String valitseSattumanvarainenTehtava() {
-        return tehtavalista.get(valitseSattumanvarainenTehtava(tehtavalista.size() - 1));
+        System.out.println("Valitaan satunnainen tehtävä");
+        return tehtavalista.get(valitseSattumanvarainenTehtavaLogiikka(tehtavalista.size() - 1));
     }
 
     public String valitseTehtava(int tehtavanro) {
+        System.out.println("Valitaan tehtävä " + tehtavanro);
         return tehtavalista.get(tehtavanro);
     }
 
     public double annaSattumanvarainenDouble(int min, int max) {
-        Random r = new Random();
         double randomLuku = min + (max - min) * r.nextDouble();
         return randomLuku;
     }
 
-    public int valitseSattumanvarainenTehtava(int max) {
-        Random r = new Random();
+    public int valitseSattumanvarainenTehtavaLogiikka(int max) {
+        System.out.println("Arvotaan luku satunnaisen tehävän valitsemista varten. Int max on " + max);
         int randomLuku = r.nextInt(max);
         if (tehdytTehtavat.contains(randomLuku) && tehdytTehtavat.size() != tehtavalista.size()) {
             //tässä pienennetään todennäköisyyttä että saadaan uudestaan jo tehty tehtävä.
@@ -53,6 +65,10 @@ public class Tehtavat {
             randomLuku = r.nextInt(max);
         }
         return randomLuku;
+    }
+    
+    public int getTehtavienLkmListalla() {
+        return tehtavalista.size();
     }
 
 }
