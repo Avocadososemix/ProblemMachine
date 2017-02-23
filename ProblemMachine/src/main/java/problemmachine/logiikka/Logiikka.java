@@ -41,40 +41,33 @@ public class Logiikka {
     }
 
     public void haeTehtava() {
-        System.out.println("Suoritetaan satunnaisen tehtavan haku");
+        vastaus = "$";
         paloitteleTehtava(tehtava.valitseSattumanvarainenTehtava());
-//        nykyinenTehtava = matematiikka.valitseSattumanvarainenTehtava();
-//        System.out.println(nykyinenTehtava);
     }
 
-    //tässä pitäisi estää käyttäjän hakemasta tehtävänumeroilla joilla ei löydy
-    //tehtäviä. Käytetään getTehtavienLkmListalla() metodia.
     public void haeTehtava(int tehtavanro) {
+        if (tehtavanro + 1 > tehtava.getTehtavienLkmListalla()) {
+            tehtavanro = 0;
+        }
         vastaus = "$";
-        System.out.println("Tehtavan haku arvolla " + tehtavanro);
         paloitteleTehtava(tehtava.valitseTehtava(tehtavanro));
 
     }
 
     //osa 1 = tehtävä; osa 2 = vastaus; osa 3 = tehtävä avattuna; osa 4 = vaikeusaste/aihealue.
-    //pitäisiköhän tässä tallentaa osat yleisiin muuttujiin?
-    //tehtavan alkuun kaikki muuttujat? tai loppuun?
     public void paloitteleTehtava(String tehtavaOsat) {
-        System.out.println("Ositellaan tehtävä-String");
         System.out.println(tehtavaOsat);
         String[] osat = tehtavaOsat.split("\\|");
         System.out.println("-osat jaettu, osia pitäisi olla 4, osia on " + osat.length);
         kysymys = osat[0];
-        System.out.println("-kysymys määritelty");
         vastaus = (osat[1]);
-        System.out.println("-vastaus määritelty");
         laajaVastaus = osat[2];
         System.out.println("-laajavastaus määritelty");
         if (!osat[3].trim().isEmpty()) {
-        osat = osat[3].split(",");
-        muuttujienlkm = osat.length;
-        System.out.println("-muuttujienlkm määritelty");
-        annetaanSattumanvaraiset(osat);
+            osat = osat[3].split(",");
+            muuttujienlkm = osat.length;
+            System.out.println("-muuttujienlkm määritelty:" + muuttujienlkm);
+            annetaanSattumanvaraiset(osat);
         }
 
     }
@@ -84,12 +77,12 @@ public class Logiikka {
         IntVaiDouble[] kirjainmuuttujat = new IntVaiDouble[osat.length];
         for (int i = 0; i < osat.length; i++) {
             String[] minmax = osat[i].split("-");
-            if (minmax[i].contains(".")) {
+            if (minmax[0].contains(".") || minmax[1].contains(".")) {
                 System.out.println("-Koitetaan antaa sattumanvarainen double");
-                System.out.println("-Minimi on " + minmax[0] + " ja maksimi " + minmax[1]);
+                System.out.println("-Minimi on " + minmax[0].trim() + " ja maksimi " + minmax[1].trim());
                 kirjainmuuttujat[i] = new IntVaiDouble(annaSattumanvarainenDouble(
-                        Double.parseDouble(minmax[0]),
-                        Double.parseDouble(minmax[1])));
+                        Double.parseDouble(minmax[0].replaceAll("(^\\h*)|(\\h*$)", "")),
+                        Double.parseDouble(minmax[1].trim())));
 
             } else {
                 System.out.println("-koitetaan antaa sattumanvarainen int");
@@ -113,7 +106,15 @@ public class Logiikka {
     }
 
     public double annaSattumanvarainenDouble(double min, double max) {
+        System.out.println("Keksitään double luku arvoväliltä " + min + " ja " + max);
         double randomLuku = min + (Math.random() * ((max - min) + 1));
+        System.out.println("toimiiko double to string");
+        String formatoitu = Double.toString(randomLuku);
+        System.out.println("toimi");
+        System.out.println(formatoitu);
+        formatoitu = format.format(randomLuku);
+        formatoitu.replace(',', '.');
+        randomLuku = Double.parseDouble((formatoitu));
         return randomLuku;
     }
 
@@ -151,8 +152,30 @@ public class Logiikka {
         for (char i = 0; i < muuttujienlkm; i++) {
             laajaVastaus = laajaVastaus.replace("$" + (char) ('A' + i), muuttujat.get((char) ('A' + i)).toString());
         }
-
+        laajaVastaus = muunnetaanLaajaVastaus();
         return (laajaVastaus.trim());
+    }
+
+    public String muunnetaanLaajaVastaus() {
+        int alku = 0;
+        int loppu = 0;
+        for (int i = 0; i < laajaVastaus.length(); i++) {
+            if (laajaVastaus.charAt(i) == '{') {
+                alku = i;
+            }
+            if (laajaVastaus.charAt(i) == '}') {
+                loppu = i;
+            }
+            if (loppu != 0) {
+                System.out.println("substring on " + laajaVastaus.substring(alku + 1, loppu));
+                System.out.println("laskettu lasku on " + laskin(laajaVastaus.substring(alku + 1, loppu)));
+                this.laajaVastaus = laajaVastaus.replaceFirst("\\{[0-9,\\-,\\*,\\/,\\+,\\.]*\\}",
+                        laskin(laajaVastaus.substring(alku + 1, loppu)));
+                loppu = 0;
+                System.out.println("muutosten jälkeen laajaVastaus on " + laajaVastaus);
+            }
+        }
+        return laajaVastaus;
     }
 
     public boolean tarkistaVastaus(String annettuvastaus) {
@@ -171,7 +194,6 @@ public class Logiikka {
     public String laskin(String input) {
         format.setDecimalSeparatorAlwaysShown(false);
         format.setRoundingMode(RoundingMode.CEILING);
-//        System.out.println("Aluksi input on " + input);
         try {
             ScriptEngineManager manageri = new ScriptEngineManager();
             ScriptEngine engine = manageri.getEngineByName("JavaScript");
@@ -187,6 +209,10 @@ public class Logiikka {
             System.out.println(e);
         }
         return "";
+    }
+
+    public String getPisteet() {
+        return Integer.toString(oikeatVastaukset);
     }
 
 }

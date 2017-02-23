@@ -14,5 +14,6 @@ Päivä | Tunnit | Kuvaus
 19.02.2017 | 6h | Opettelin graafisen käyttöliittymän luontia.
 20.02.2017 | 4h | Alkeellinen versio graafisesta käyttöliittymästä on valmis, päädyin paljon päänvaivan jälkeen käyttämään valmista designeria. Paransin tapaa kirjoittaa uusia tehtäviä järjestelmään. Tein testejä.
 21.02.2017 | 7h | Sain graafisen käyttöliittymän toimintakuntoon, vielä pitää lisätä tehtäviä lisää ja muuttaa hieman mallivastauksen toteutusta.
+22.02.2017 | 2h | Kehitin logiikkaa, korjasin tiettyjen kysymysten aiheuttamia vikoja.
 ... | ... | ...
 
