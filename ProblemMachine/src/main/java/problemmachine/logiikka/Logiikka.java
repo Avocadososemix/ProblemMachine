@@ -113,8 +113,10 @@ public class Logiikka {
         System.out.println("toimi");
         System.out.println(formatoitu);
         formatoitu = format.format(randomLuku);
-        formatoitu.replace(',', '.');
-        randomLuku = Double.parseDouble((formatoitu));
+        formatoitu = formatoitu.replaceAll(",", ".");
+        System.out.println("pilkut vaihdettu");
+        System.out.println(formatoitu);
+        randomLuku = Double.parseDouble(formatoitu);
         return randomLuku;
     }
 
@@ -169,7 +171,7 @@ public class Logiikka {
             if (loppu != 0) {
                 System.out.println("substring on " + laajaVastaus.substring(alku + 1, loppu));
                 System.out.println("laskettu lasku on " + laskin(laajaVastaus.substring(alku + 1, loppu)));
-                this.laajaVastaus = laajaVastaus.replaceFirst("\\{[0-9,\\-,\\*,\\/,\\+,\\.]*\\}",
+                this.laajaVastaus = laajaVastaus.replaceFirst("\\{[0-9,\\-,\\*,\\/,\\+,\\.,\\%,\\(,\\)]*\\}",
                         laskin(laajaVastaus.substring(alku + 1, loppu)));
                 loppu = 0;
                 System.out.println("muutosten jälkeen laajaVastaus on " + laajaVastaus);
