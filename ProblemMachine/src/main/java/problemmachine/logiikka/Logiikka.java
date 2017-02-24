@@ -20,6 +20,7 @@ import problemmachine.tehtavat.Tehtavat;
 public class Logiikka {
 
     Tehtavat tehtava = new Tehtavat();
+    Satunnaisuus sattuma = new Satunnaisuus();
 
     private HashMap<Character, IntVaiDouble> muuttujat = new HashMap<>();
     private String kysymys;
@@ -58,28 +59,26 @@ public class Logiikka {
     public void paloitteleTehtava(String tehtavaOsat) {
         System.out.println(tehtavaOsat);
         String[] osat = tehtavaOsat.split("\\|");
-        System.out.println("-osat jaettu, osia pitäisi olla 4, osia on " + osat.length);
         kysymys = osat[0];
         vastaus = (osat[1]);
         laajaVastaus = osat[2];
-        System.out.println("-laajavastaus määritelty");
         if (!osat[3].trim().isEmpty()) {
             osat = osat[3].split(",");
             muuttujienlkm = osat.length;
-            System.out.println("-muuttujienlkm määritelty:" + muuttujienlkm);
+//            System.out.println("-muuttujienlkm määritelty:" + muuttujienlkm);
             annetaanSattumanvaraiset(osat);
         }
 
     }
 
     public void annetaanSattumanvaraiset(String[] osat) {
-        System.out.println("Valitaan satunnaiset arvot tehtävään");
+//        System.out.println("Valitaan satunnaiset arvot tehtävään");
         IntVaiDouble[] kirjainmuuttujat = new IntVaiDouble[osat.length];
         for (int i = 0; i < osat.length; i++) {
             String[] minmax = osat[i].split("-");
             if (minmax[0].contains(".") || minmax[1].contains(".")) {
-                System.out.println("-Koitetaan antaa sattumanvarainen double");
-                System.out.println("-Minimi on " + minmax[0].trim() + " ja maksimi " + minmax[1].trim());
+//                System.out.println("-Koitetaan antaa sattumanvarainen double");
+//                System.out.println("-Minimi on " + minmax[0].trim() + " ja maksimi " + minmax[1].trim());
                 kirjainmuuttujat[i] = new IntVaiDouble(annaSattumanvarainenDouble(
                         Double.parseDouble(minmax[0].replaceAll("(^\\h*)|(\\h*$)", "")),
                         Double.parseDouble(minmax[1].trim())));
@@ -89,33 +88,33 @@ public class Logiikka {
                 System.out.println("-Minimi on " + minmax[0] + " ja maksimi " + minmax[1]);
                 kirjainmuuttujat[i] = new IntVaiDouble(annaSattumanvarainenInt(
                         Integer.valueOf(minmax[0].trim()), Integer.valueOf(minmax[1].trim())));
-                System.out.println("Satunnaisarvo annettu");
+//                System.out.println("Satunnaisarvo annettu");
             }
         }
-        System.out.println("-Asetetaan muuttujat taulukkoon");
+//        System.out.println("-Asetetaan muuttujat taulukkoon");
         for (char i = 0; i < osat.length; i++) {
             muuttujat.put((char) (i + 'A'), kirjainmuuttujat[i]);
         }
-        System.out.println("-muuttujia on tallennettuna " + muuttujat.size());
+//        System.out.println("-muuttujia on tallennettuna " + muuttujat.size());
     }
 
     public int annaSattumanvarainenInt(int min, int max) {
-        System.out.println("Keksitään sattumanvarainen luku väliltä " + min + " ja " + max);
+//        System.out.println("Keksitään sattumanvarainen luku väliltä " + min + " ja " + max);
         int randomLuku = min + (int) (Math.random() * ((max - min) + 1));
         return randomLuku;
     }
 
     public double annaSattumanvarainenDouble(double min, double max) {
-        System.out.println("Keksitään double luku arvoväliltä " + min + " ja " + max);
+//        System.out.println("Keksitään double luku arvoväliltä " + min + " ja " + max);
         double randomLuku = min + (Math.random() * ((max - min) + 1));
-        System.out.println("toimiiko double to string");
+//        System.out.println("toimiiko double to string");
         String formatoitu = Double.toString(randomLuku);
-        System.out.println("toimi");
-        System.out.println(formatoitu);
+//        System.out.println("toimi");
+//        System.out.println(formatoitu);
         formatoitu = format.format(randomLuku);
         formatoitu = formatoitu.replaceAll(",", ".");
-        System.out.println("pilkut vaihdettu");
-        System.out.println(formatoitu);
+//        System.out.println("pilkut vaihdettu");
+//        System.out.println(formatoitu);
         randomLuku = Double.parseDouble(formatoitu);
         return randomLuku;
     }
@@ -169,20 +168,20 @@ public class Logiikka {
                 loppu = i;
             }
             if (loppu != 0) {
-                System.out.println("substring on " + laajaVastaus.substring(alku + 1, loppu));
-                System.out.println("laskettu lasku on " + laskin(laajaVastaus.substring(alku + 1, loppu)));
+//                System.out.println("substring on " + laajaVastaus.substring(alku + 1, loppu));
+//                System.out.println("laskettu lasku on " + laskin(laajaVastaus.substring(alku + 1, loppu)));
                 this.laajaVastaus = laajaVastaus.replaceFirst("\\{[0-9,\\-,\\*,\\/,\\+,\\.,\\%,\\(,\\)]*\\}",
                         laskin(laajaVastaus.substring(alku + 1, loppu)));
                 loppu = 0;
-                System.out.println("muutosten jälkeen laajaVastaus on " + laajaVastaus);
+//                System.out.println("muutosten jälkeen laajaVastaus on " + laajaVastaus);
             }
         }
         return laajaVastaus;
     }
 
     public boolean tarkistaVastaus(String annettuvastaus) {
-        System.out.println("Annettu vastaus on " + annettuvastaus);
-        System.out.println("Oikea vastaus on " + getVastausMuuttujilla());
+//        System.out.println("Annettu vastaus on " + annettuvastaus);
+//        System.out.println("Oikea vastaus on " + getVastausMuuttujilla());
         String vastausTrim = annettuvastaus.trim();
         if (vastausTrim.equals(getVastausMuuttujilla().trim())) {
             oikeatVastaukset++;

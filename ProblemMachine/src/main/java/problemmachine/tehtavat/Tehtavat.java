@@ -24,12 +24,10 @@ public class Tehtavat {
     public Tehtavat(Random r) {
         this.r = r;
     }
-    
+
     public Tehtavat() {
         this(new Random());
     }
-    
-    
 
     public void lueTiedosto(String lahdetiedosto) {
         tehtavalista.clear();
@@ -44,12 +42,12 @@ public class Tehtavat {
     }
 
     public String valitseSattumanvarainenTehtava() {
-        System.out.println("Valitaan satunnainen tehtävä");
+//        System.out.println("Valitaan satunnainen tehtävä");
         return tehtavalista.get(valitseSattumanvarainenTehtavaLogiikka(tehtavalista.size()));
     }
 
     public String valitseTehtava(int tehtavanro) {
-        System.out.println("Valitaan tehtävä " + tehtavanro);
+//        System.out.println("Valitaan tehtävä " + tehtavanro);
         return tehtavalista.get(tehtavanro);
     }
 
@@ -59,7 +57,7 @@ public class Tehtavat {
     }
 
     public int valitseSattumanvarainenTehtavaLogiikka(int max) {
-        System.out.println("Arvotaan luku satunnaisen tehävän valitsemista varten. Int max on " + max);
+//        System.out.println("Arvotaan luku satunnaisen tehävän valitsemista varten. Int max on " + max);
         int randomLuku = r.nextInt(max);
         if (tehdytTehtavat.contains(randomLuku) && tehdytTehtavat.size() != tehtavalista.size()) {
             //tässä pienennetään todennäköisyyttä että saadaan uudestaan jo tehty tehtävä.
@@ -68,7 +66,7 @@ public class Tehtavat {
         }
         return randomLuku;
     }
-    
+
     public int getTehtavienLkmListalla() {
         return tehtavalista.size();
     }
