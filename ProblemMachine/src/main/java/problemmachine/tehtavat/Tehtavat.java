@@ -43,7 +43,7 @@ public class Tehtavat {
 
     public String valitseSattumanvarainenTehtava() {
 //        System.out.println("Valitaan satunnainen tehtävä");
-        return tehtavalista.get(valitseSattumanvarainenTehtavaLogiikka(tehtavalista.size()));
+        return tehtavalista.get(valitseSattumanvarainenPainotettu(tehtavalista.size()));
     }
 
     public String valitseTehtava(int tehtavanro) {
@@ -51,7 +51,7 @@ public class Tehtavat {
         return tehtavalista.get(tehtavanro);
     }
 
-    public int valitseSattumanvarainenTehtavaLogiikka(int max) {
+    public int valitseSattumanvarainenPainotettu(int max) {
 //        System.out.println("Arvotaan luku satunnaisen tehävän valitsemista varten. Int max on " + max);
         int randomLuku = r.nextInt(max);
         if (tehdytTehtavat.contains(randomLuku) && tehdytTehtavat.size() != tehtavalista.size()) {

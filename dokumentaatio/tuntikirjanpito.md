@@ -17,5 +17,6 @@ Päivä | Tunnit | Kuvaus
 22.02.2017 | 2h | Kehitin logiikkaa, korjasin tiettyjen kysymysten aiheuttamia vikoja.
 23.02.2017 | 3h | Sain kaikki toiminnallisuudet toimimaan graafisessa käyttöliittymässä, ongelmana että en saa haettua tiedostoja muilla koneilla kuin omalla.
 24.02.2017 | 3h | Muutin luokkia, lisäsin Satunnaisuus-luokan kutistaakseni Logiikka-luokkaa. Koitin tehdä luokka-kaavion, mutta jouduin muuttamaan rakennetta joten se on vielä kesken.
+24.02.2017 | 1h | Laskin-luokka luotu jonne siirretty entisen laskin metodin toiminta.
 ... | ... | ...
 

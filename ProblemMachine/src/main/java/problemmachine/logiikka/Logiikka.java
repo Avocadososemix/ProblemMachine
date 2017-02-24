@@ -5,12 +5,8 @@
  */
 package problemmachine.logiikka;
 
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.HashMap;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import problemmachine.tehtavat.Tehtavat;
 
 /**
@@ -19,22 +15,30 @@ import problemmachine.tehtavat.Tehtavat;
  */
 public class Logiikka {
 
-    Tehtavat tehtava = new Tehtavat();
-    Satunnaisuus sattuma = new Satunnaisuus();
+    Tehtavat tehtava;
+    Satunnaisuus sattuma;
+    Laskin laskija;
 
-    private HashMap<Character, IntVaiDouble> muuttujat = new HashMap<>();
+    private HashMap<Character, IntVaiDouble> muuttujat;
     private String kysymys;
     private String vastaus;
     private String laajaVastaus;
 
-    private int muuttujienlkm = 0;
-    private int oikeatVastaukset = 0;
-    private int vaaratVastaukset = 0;
+    private int muuttujienlkm;
+    private int oikeatVastaukset;
+    private int vaaratVastaukset;
 
-    DecimalFormat format = new DecimalFormat("#.##");
+    DecimalFormat format;
 
     public Logiikka() {
-
+        format = new DecimalFormat("#.##");
+        tehtava = new Tehtavat();
+        sattuma = new Satunnaisuus();
+        laskija = new Laskin();
+        muuttujat = new HashMap<>();
+        muuttujienlkm = 0;
+        oikeatVastaukset = 0;
+        vaaratVastaukset = 0;
     }
 
     public void kaynnista(String nimi) {
@@ -72,7 +76,6 @@ public class Logiikka {
     }
 
     public void annetaanSattumanvaraiset(String[] osat) {
-//        System.out.println("Valitaan satunnaiset arvot tehtävään");
         IntVaiDouble[] kirjainmuuttujat = new IntVaiDouble[osat.length];
         for (int i = 0; i < osat.length; i++) {
             String[] minmax = osat[i].split("-");
@@ -99,10 +102,14 @@ public class Logiikka {
     }
 
     public String getKysymysMuuttujilla() {
+        return vaihdaArvotMuuttujiin(kysymys);
+    }
+
+    public String vaihdaArvotMuuttujiin(String vaihdettava) {
         for (char i = 0; i < muuttujienlkm; i++) {
-            kysymys = kysymys.replace("$" + (char) ('A' + i), muuttujat.get((char) ('A' + i)).toString());
+            vaihdettava = vaihdettava.replace("$" + (char) ('A' + i), muuttujat.get((char) ('A' + i)).toString());
         }
-        return kysymys;
+        return vaihdettava;
     }
 
     public String getVastausMuuttujilla() {
@@ -110,16 +117,12 @@ public class Logiikka {
             return vastaus;
         }
         format.setDecimalSeparatorAlwaysShown(false);
-        for (char i = 0; i < muuttujienlkm; i++) {
-            vastaus = vastaus.replace("$" + (char) ('A' + i), muuttujat.get((char) ('A' + i)).toString());
-        }
-        return laskin(vastaus);
+        vastaus = laskija.laskin(vaihdaArvotMuuttujiin(vastaus));
+        return vastaus;
     }
 
     public String getLaajaVastausMuuttujilla() {
-        for (char i = 0; i < muuttujienlkm; i++) {
-            laajaVastaus = laajaVastaus.replace("$" + (char) ('A' + i), muuttujat.get((char) ('A' + i)).toString());
-        }
+        laajaVastaus = vaihdaArvotMuuttujiin(laajaVastaus);
         laajaVastaus = muunnetaanLaajaVastaus();
         return (laajaVastaus.trim());
     }
@@ -138,7 +141,7 @@ public class Logiikka {
 //                System.out.println("substring on " + laajaVastaus.substring(alku + 1, loppu));
 //                System.out.println("laskettu lasku on " + laskin(laajaVastaus.substring(alku + 1, loppu)));
                 this.laajaVastaus = laajaVastaus.replaceFirst("\\{[0-9,\\-,\\*,\\/,\\+,\\.,\\%,\\(,\\)]*\\}",
-                        laskin(laajaVastaus.substring(alku + 1, loppu)));
+                        laskija.laskin(laajaVastaus.substring(alku + 1, loppu)));
                 loppu = 0;
 //                System.out.println("muutosten jälkeen laajaVastaus on " + laajaVastaus);
             }
@@ -159,36 +162,8 @@ public class Logiikka {
         }
     }
 
-    public String laskin(String input) {
-        format.setDecimalSeparatorAlwaysShown(false);
-        format.setRoundingMode(RoundingMode.CEILING);
-        try {
-            ScriptEngineManager manageri = new ScriptEngineManager();
-            ScriptEngine engine = manageri.getEngineByName("JavaScript");
-            String palaute = engine.eval(input).toString();
-            if (palaute.contains(".")) {
-                vastaus = format.format(Double.parseDouble(palaute));
-                return vastaus;
-            } else {
-                vastaus = palaute;
-                return vastaus;
-            }
-        } catch (ScriptException | NumberFormatException e) {
-            System.out.println(e);
-        }
-        return "";
-    }
-
     public String getPisteet() {
         return Integer.toString(oikeatVastaukset);
-    }
-    
-    public String getVastaus() {
-        return vastaus;
-    }
-    
-    public void setVastaus(String vastaus) {
-        this.vastaus = vastaus;
     }
 
 }
