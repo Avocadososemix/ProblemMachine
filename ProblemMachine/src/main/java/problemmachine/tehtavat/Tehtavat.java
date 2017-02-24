@@ -51,11 +51,6 @@ public class Tehtavat {
         return tehtavalista.get(tehtavanro);
     }
 
-    public double annaSattumanvarainenDouble(int min, int max) {
-        double randomLuku = min + (max - min) * r.nextDouble();
-        return randomLuku;
-    }
-
     public int valitseSattumanvarainenTehtavaLogiikka(int max) {
 //        System.out.println("Arvotaan luku satunnaisen tehävän valitsemista varten. Int max on " + max);
         int randomLuku = r.nextInt(max);

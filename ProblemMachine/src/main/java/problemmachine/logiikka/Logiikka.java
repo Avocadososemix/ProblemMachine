@@ -98,19 +98,11 @@ public class Logiikka {
 //        System.out.println("-muuttujia on tallennettuna " + muuttujat.size());
     }
 
-    public String getKysymys() {
-        return kysymys;
-    }
-
     public String getKysymysMuuttujilla() {
         for (char i = 0; i < muuttujienlkm; i++) {
             kysymys = kysymys.replace("$" + (char) ('A' + i), muuttujat.get((char) ('A' + i)).toString());
         }
         return kysymys;
-    }
-
-    public String getVastaus() {
-        return vastaus;
     }
 
     public String getVastausMuuttujilla() {
@@ -122,10 +114,6 @@ public class Logiikka {
             vastaus = vastaus.replace("$" + (char) ('A' + i), muuttujat.get((char) ('A' + i)).toString());
         }
         return laskin(vastaus);
-    }
-
-    public String getLaajaVastaus() {
-        return laajaVastaus;
     }
 
     public String getLaajaVastausMuuttujilla() {
@@ -193,6 +181,14 @@ public class Logiikka {
 
     public String getPisteet() {
         return Integer.toString(oikeatVastaukset);
+    }
+    
+    public String getVastaus() {
+        return vastaus;
+    }
+    
+    public void setVastaus(String vastaus) {
+        this.vastaus = vastaus;
     }
 
 }
