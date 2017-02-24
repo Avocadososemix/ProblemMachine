@@ -15,5 +15,7 @@ Päivä | Tunnit | Kuvaus
 20.02.2017 | 4h | Alkeellinen versio graafisesta käyttöliittymästä on valmis, päädyin paljon päänvaivan jälkeen käyttämään valmista designeria. Paransin tapaa kirjoittaa uusia tehtäviä järjestelmään. Tein testejä.
 21.02.2017 | 7h | Sain graafisen käyttöliittymän toimintakuntoon, vielä pitää lisätä tehtäviä lisää ja muuttaa hieman mallivastauksen toteutusta.
 22.02.2017 | 2h | Kehitin logiikkaa, korjasin tiettyjen kysymysten aiheuttamia vikoja.
+23.02.2017 | 3h | Sain kaikki toiminnallisuudet toimimaan graafisessa käyttöliittymässä, ongelmana että en saa haettua tiedostoja muilla koneilla kuin omalla.
+24.02.2017 | 3h | Muutin luokkia, lisäsin Satunnaisuus-luokan kutistaakseni Logiikka-luokkaa. Koitin tehdä luokka-kaavion, mutta jouduin muuttamaan rakennetta joten se on vielä kesken.
 ... | ... | ...
 

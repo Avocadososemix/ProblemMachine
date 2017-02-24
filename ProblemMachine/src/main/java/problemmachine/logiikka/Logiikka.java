@@ -79,14 +79,14 @@ public class Logiikka {
             if (minmax[0].contains(".") || minmax[1].contains(".")) {
 //                System.out.println("-Koitetaan antaa sattumanvarainen double");
 //                System.out.println("-Minimi on " + minmax[0].trim() + " ja maksimi " + minmax[1].trim());
-                kirjainmuuttujat[i] = new IntVaiDouble(annaSattumanvarainenDouble(
+                kirjainmuuttujat[i] = new IntVaiDouble(sattuma.annaSattumanvarainenDouble(
                         Double.parseDouble(minmax[0].replaceAll("(^\\h*)|(\\h*$)", "")),
                         Double.parseDouble(minmax[1].trim())));
 
             } else {
                 System.out.println("-koitetaan antaa sattumanvarainen int");
                 System.out.println("-Minimi on " + minmax[0] + " ja maksimi " + minmax[1]);
-                kirjainmuuttujat[i] = new IntVaiDouble(annaSattumanvarainenInt(
+                kirjainmuuttujat[i] = new IntVaiDouble(sattuma.annaSattumanvarainenInt(
                         Integer.valueOf(minmax[0].trim()), Integer.valueOf(minmax[1].trim())));
 //                System.out.println("Satunnaisarvo annettu");
             }
@@ -96,27 +96,6 @@ public class Logiikka {
             muuttujat.put((char) (i + 'A'), kirjainmuuttujat[i]);
         }
 //        System.out.println("-muuttujia on tallennettuna " + muuttujat.size());
-    }
-
-    public int annaSattumanvarainenInt(int min, int max) {
-//        System.out.println("Keksitään sattumanvarainen luku väliltä " + min + " ja " + max);
-        int randomLuku = min + (int) (Math.random() * ((max - min) + 1));
-        return randomLuku;
-    }
-
-    public double annaSattumanvarainenDouble(double min, double max) {
-//        System.out.println("Keksitään double luku arvoväliltä " + min + " ja " + max);
-        double randomLuku = min + (Math.random() * ((max - min) + 1));
-//        System.out.println("toimiiko double to string");
-        String formatoitu = Double.toString(randomLuku);
-//        System.out.println("toimi");
-//        System.out.println(formatoitu);
-        formatoitu = format.format(randomLuku);
-        formatoitu = formatoitu.replaceAll(",", ".");
-//        System.out.println("pilkut vaihdettu");
-//        System.out.println(formatoitu);
-        randomLuku = Double.parseDouble(formatoitu);
-        return randomLuku;
     }
 
     public String getKysymys() {
