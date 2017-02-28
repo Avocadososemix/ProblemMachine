@@ -17,6 +17,9 @@ public class RememberingRandom extends Random {
     private ArrayList<Double> doubleRandom;
     private ArrayList<Integer> intRandom;
     
+    /**
+     *
+     */
     public RememberingRandom() {
         doubleRandom = new ArrayList<Double>();
         intRandom = new ArrayList<Integer>();
@@ -36,10 +39,18 @@ public class RememberingRandom extends Random {
         return lukuDouble;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Double> getDoubleRandom() {
         return doubleRandom;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Integer> getIntRandom() {
         return intRandom;
     }

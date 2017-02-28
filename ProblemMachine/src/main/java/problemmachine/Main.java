@@ -15,6 +15,11 @@ import problemmachine.ui.Kayttoliittyma;
  */
 public class Main {
 
+    /**
+     * Luodaan ja käynnistetään käyttöliittymä.
+     * 
+     * @param args Ohjelman-komentorivi-argumentit.
+     */
     public static void main(String[] args) {
 
         Logiikka logic = new Logiikka();
@@ -26,20 +31,5 @@ public class Main {
             }
         });
 
-//        System.out.println("Uusi logiikka luotu");
-        //kysymyksetMatematiikka.txt
-        //kysymyksetFysiikka.txt
-        //kysymyksetKemia.txt
-//        System.out.println("Kysymykset ladattu");
-//        
-//        logic.kaynnista("kysymyksetMatematiikka.txt");
-//        logic.haeTehtava();
-//        System.out.println(logic.getKysymysMuuttujilla());
-//        System.out.println(logic.getVastausMuuttujilla());
-//        System.out.println("Laajavastaus");
-//System.out.println("moi!");
-//        System.out.println(logic.getLaajaVastausMuuttujilla());
-//
-//    }
     }
 }

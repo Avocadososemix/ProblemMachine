@@ -22,9 +22,15 @@ public class IntVaiDoubleTest {
     private int arvoInt;
     private double arvoDouble;
 
+    /**
+     *
+     */
     public IntVaiDoubleTest() {
     }
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
         boolean kumpi = true;
@@ -76,6 +82,9 @@ public class IntVaiDoubleTest {
 
     }
 
+    /**
+     *
+     */
     @Test
     public void testToStringDouble() {
         kumpi = false;

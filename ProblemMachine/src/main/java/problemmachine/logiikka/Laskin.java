@@ -30,17 +30,18 @@ public class Laskin {
     public Laskin() {
         format = new DecimalFormat("#.##");
     }
-    
+
     /**
-     * Metodi saa parametrinaan String-tyyppisen muuttujan, joka sisältää
-     * laskun muodossa jonka ScriptEngine kykenee laskemaan. ScriptEnginen laskettua
-     * annettu lasku-input, palautetaan lasketun laskun tulos. Mikäli laskun tulos
-     * sisältää desimaalin, pyöristetään laskettu arvo ylöspäin ja annetaan vastaus
-     * 2 desimaalipisteen tarkkuudella, muutoin palautetaan arvo sellasenaan. Try-catch
-     * käytetty jotta saamme ScriptEnginen toimimaan.
-     * 
+     * Metodi saa parametrinaan String-tyyppisen muuttujan, joka sisältää laskun
+     * muodossa jonka ScriptEngine kykenee laskemaan. ScriptEnginen laskettua
+     * annettu lasku-input, palautetaan lasketun laskun tulos. Mikäli laskun
+     * tulos sisältää desimaalin, pyöristetään laskettu arvo ylöspäin ja
+     * annetaan vastaus 2 desimaalipisteen tarkkuudella, muutoin palautetaan
+     * arvo sellasenaan. Try-catch käytetty jotta saamme ScriptEnginen
+     * toimimaan.
+     *
      * @param input Laskettava lasku String-tyyppisenä oliona.
-     * 
+     *
      * @return annetun laskun tulos laskennan jälkeen.
      */
     public String laskin(String input) {

@@ -14,10 +14,17 @@ import problemmachine.logiikka.Logiikka;
 public class Kayttoliittyma extends javax.swing.JFrame {
 
     /**
-     * Creates new form Kayttoliittyma
+     * Luodaan uusi Logiikka-luokkaolio, jota käytetään luokan alustamisessa kun
+     * tätä kutsutaan käyttöliittymän konstruktorissa.
      */
     private Logiikka logic;
 
+    /**
+     * Metodissa alustetaan käyttöliittymä, joka alustaa uuden logiikka.luokan
+     * ilmentymän.
+     * 
+     * @param logic Logiikka-luokan ilmentymä jolla alustetaan Logiikka-luokka.
+     */
     public Kayttoliittyma(Logiikka logic) {
         this.logic = logic;
         initComponents();
@@ -100,11 +107,6 @@ public class Kayttoliittyma extends javax.swing.JFrame {
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField1FocusGained(evt);
-            }
-        });
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
             }
         });
 
@@ -209,12 +211,6 @@ public class Kayttoliittyma extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
 
     private void uusiKysymysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uusiKysymysActionPerformed
         logic.haeTehtava();

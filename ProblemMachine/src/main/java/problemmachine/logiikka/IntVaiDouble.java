@@ -28,9 +28,9 @@ public class IntVaiDouble {
     }
 
     /**
-     * Konstruktori joka antaa arvoDouble:lle arvon, sekä muuttaa boolean kumpi:n
-     * epätodeksi. Saatu arvo tallennetaan yleiseen muuttujaan.
-     * 
+     * Konstruktori joka antaa arvoDouble:lle arvon, sekä muuttaa boolean
+     * kumpi:n epätodeksi. Saatu arvo tallennetaan yleiseen muuttujaan.
+     *
      * @param arvo, Double, parametrin tyyppi määrittelee kumpi-muuttujan
      * totisuuden.
      */
@@ -41,26 +41,38 @@ public class IntVaiDouble {
 
     /**
      * Metodi tarkistaa onko luokan saama arvo int-tyyppiä.
-     * 
+     *
      * @return palautetaan true jos saatu arvo on int-tyyppinen, false mikäli
      * arvo on double-tyyppiä.
      */
     public boolean testOnkoInt() {
         return kumpi;
     }
-    
+
+    /**
+     * Palauttaa int-tyyppisen arvon luokasta mikäli sellainen on sinne
+     * tallennettu.
+     *
+     * @return palautus on arvoInt, int-tyyppinen muuttuja.
+     */
     public int getIntArvo() {
         return arvoInt;
     }
 
+    /**
+     * Palauttaa double-tyyppisen arvon luokasta mikäli sellainen on sinne
+     * tallennettu.
+     *
+     * @return palautus on arvoDouble, double-tyyppinen muuttuja.
+     */
     public double getDoubleArvo() {
         return arvoDouble;
     }
 
     /**
-     * Metodi antaa String-tyyppisenä arvon joka on tallennettuna 
+     * Metodi antaa String-tyyppisenä arvon joka on tallennettuna
      * IntVaiDouble-luokkaan.
-     * 
+     *
      * @return palautetaan String-tyyppisenä IntVaiDoublen arvo.
      */
     @Override

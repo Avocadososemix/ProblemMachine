@@ -5,10 +5,7 @@
  */
 package problemmachine.logiikka;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import problemmachine.tehtavat.Tehtavat;
@@ -22,22 +19,34 @@ public class LogiikkaTest {
     Logiikka logic;
     Tehtavat tehtava;
 
+    /**
+     *
+     */
     public LogiikkaTest() {
 
     }
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
         logic = new Logiikka();
         tehtava = new Tehtavat();
     }
 
+    /**
+     *
+     */
     @Test
     public void testKaynnista() {
         logic.kaynnista("kysymyksetMatematiikka.txt");
         assertNotNull(tehtava.getTehtavienLkmListalla());
     }
 
+    /**
+     *
+     */
     @Test
     public void testHaeTehtava() {
         System.out.println("haeTehtava");
@@ -117,5 +126,4 @@ public class LogiikkaTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-
 }
