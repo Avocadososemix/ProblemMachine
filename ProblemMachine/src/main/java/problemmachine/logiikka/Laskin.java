@@ -17,12 +17,32 @@ import javax.script.ScriptException;
  */
 public class Laskin {
 
-    DecimalFormat format;
+    /**
+     * Oliomuuttuja format on käytössä, jotta voimme pyöristää sekä rajata
+     * laskimen tuloksena saadun arvon 2 desimaalipisteen tarkkuudella.
+     */
+    private DecimalFormat format;
 
+    /**
+     * Konstruktori asettaa format-muuttujalle 2 desimaalipisteen tarkkuuden kun
+     * tätä käytetään numeroiden (String-muodossa) formatoimiseen.
+     */
     public Laskin() {
         format = new DecimalFormat("#.##");
     }
-
+    
+    /**
+     * Metodi saa parametrinaan String-tyyppisen muuttujan, joka sisältää
+     * laskun muodossa jonka ScriptEngine kykenee laskemaan. ScriptEnginen laskettua
+     * annettu lasku-input, palautetaan lasketun laskun tulos. Mikäli laskun tulos
+     * sisältää desimaalin, pyöristetään laskettu arvo ylöspäin ja annetaan vastaus
+     * 2 desimaalipisteen tarkkuudella, muutoin palautetaan arvo sellasenaan. Try-catch
+     * käytetty jotta saamme ScriptEnginen toimimaan.
+     * 
+     * @param input Laskettava lasku String-tyyppisenä oliona.
+     * 
+     * @return annetun laskun tulos laskennan jälkeen.
+     */
     public String laskin(String input) {
         format.setDecimalSeparatorAlwaysShown(false);
         format.setRoundingMode(RoundingMode.CEILING);
@@ -34,8 +54,7 @@ public class Laskin {
                 input = format.format(Double.parseDouble(palaute));
                 return input;
             } else {
-                input = palaute;
-                return input;
+                return palaute;
             }
         } catch (ScriptException | NumberFormatException e) {
             System.out.println(e);

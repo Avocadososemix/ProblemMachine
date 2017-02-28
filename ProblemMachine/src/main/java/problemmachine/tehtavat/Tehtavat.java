@@ -17,6 +17,7 @@ import java.util.Scanner;
  */
 public class Tehtavat {
 
+    
     List<String> tehtavalista = new ArrayList();
     List<Integer> tehdytTehtavat = new ArrayList();
     Random r;

@@ -97,6 +97,11 @@ public class Kayttoliittyma extends javax.swing.JFrame {
 
         jTextField1.setText("Vastaukseni");
         jTextField1.setToolTipText("Anna vastaus enimmillään 2 desimaalin tarkkuudella.");
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField1FocusGained(evt);
+            }
+        });
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -252,6 +257,10 @@ public class Kayttoliittyma extends javax.swing.JFrame {
         logic.haeTehtava();
         jTextArea1.setText(logic.getKysymysMuuttujilla());
     }//GEN-LAST:event_matematiikkaNappiActionPerformed
+
+    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+        jTextField1.setText("");
+    }//GEN-LAST:event_jTextField1FocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

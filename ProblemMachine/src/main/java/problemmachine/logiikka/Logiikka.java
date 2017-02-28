@@ -15,9 +15,9 @@ import problemmachine.tehtavat.Tehtavat;
  */
 public class Logiikka {
 
-    Tehtavat tehtava;
-    Satunnaisuus sattuma;
-    Laskin laskija;
+    private Tehtavat tehtava;
+    private Satunnaisuus sattuma;
+    private Laskin laskija;
 
     private HashMap<Character, IntVaiDouble> muuttujat;
     private String kysymys;
@@ -26,9 +26,9 @@ public class Logiikka {
 
     private int muuttujienlkm;
     private int oikeatVastaukset;
-    private int vaaratVastaukset;
+    private boolean nykyiseenKysymykseenVastattu;
 
-    DecimalFormat format;
+    private DecimalFormat format;
 
     public Logiikka() {
         format = new DecimalFormat("#.##");
@@ -38,7 +38,7 @@ public class Logiikka {
         muuttujat = new HashMap<>();
         muuttujienlkm = 0;
         oikeatVastaukset = 0;
-        vaaratVastaukset = 0;
+        nykyiseenKysymykseenVastattu = false;
     }
 
     public void kaynnista(String nimi) {
@@ -46,36 +46,38 @@ public class Logiikka {
     }
 
     public void haeTehtava() {
-        vastaus = "$";
+        vastaus = "$"; //onko tarpeen?
+        nykyiseenKysymykseenVastattu = false;
         paloitteleTehtava(tehtava.valitseSattumanvarainenTehtava());
     }
 
-    public void haeTehtava(int tehtavanro) {
-        if (tehtavanro + 1 > tehtava.getTehtavienLkmListalla()) {
-            tehtavanro = 0;
-        }
-        vastaus = "$";
-        paloitteleTehtava(tehtava.valitseTehtava(tehtavanro));
-
-    }
-
-    //osa 1 = tehtävä; osa 2 = vastaus; osa 3 = tehtävä avattuna; osa 4 = vaikeusaste/aihealue.
-    public void paloitteleTehtava(String tehtavaOsat) {
+//    public void haeTehtava(int tehtavanro) {
+//        if (tehtavanro + 1 > tehtava.getTehtavienLkmListalla()) {
+//            tehtavanro = 0;
+//        }
+//        vastaus = "$";
+//        paloitteleTehtava(tehtava.valitseTehtava(tehtavanro));
+//
+//    }
+    
+    //osa 1 = tehtävä; osa 2 = vastaus; osa 3 = tehtävä avattuna; osa 4 = muuttujien arvot.
+    private void paloitteleTehtava(String tehtavaOsat) {
         System.out.println(tehtavaOsat);
         String[] osat = tehtavaOsat.split("\\|");
+        System.out.println("Tehtavien paloittelussa saatiin " + osat.length +"/4 osaa");
         kysymys = osat[0];
         vastaus = (osat[1]);
         laajaVastaus = osat[2];
         if (!osat[3].trim().isEmpty()) {
             osat = osat[3].split(",");
             muuttujienlkm = osat.length;
-//            System.out.println("-muuttujienlkm määritelty:" + muuttujienlkm);
+            System.out.println("-muuttujienlkm määritelty:" + muuttujienlkm);
             annetaanSattumanvaraiset(osat);
         }
 
     }
 
-    public void annetaanSattumanvaraiset(String[] osat) {
+    private void annetaanSattumanvaraiset(String[] osat) {
         IntVaiDouble[] kirjainmuuttujat = new IntVaiDouble[osat.length];
         for (int i = 0; i < osat.length; i++) {
             String[] minmax = osat[i].split("-");
@@ -91,21 +93,17 @@ public class Logiikka {
                 System.out.println("-Minimi on " + minmax[0] + " ja maksimi " + minmax[1]);
                 kirjainmuuttujat[i] = new IntVaiDouble(sattuma.annaSattumanvarainenInt(
                         Integer.valueOf(minmax[0].trim()), Integer.valueOf(minmax[1].trim())));
-//                System.out.println("Satunnaisarvo annettu");
             }
+             muuttujat.put((char) (i + 'A'), kirjainmuuttujat[i]);
+            
         }
-//        System.out.println("-Asetetaan muuttujat taulukkoon");
-        for (char i = 0; i < osat.length; i++) {
-            muuttujat.put((char) (i + 'A'), kirjainmuuttujat[i]);
-        }
-//        System.out.println("-muuttujia on tallennettuna " + muuttujat.size());
     }
 
     public String getKysymysMuuttujilla() {
         return vaihdaArvotMuuttujiin(kysymys);
     }
 
-    public String vaihdaArvotMuuttujiin(String vaihdettava) {
+    private String vaihdaArvotMuuttujiin(String vaihdettava) {
         for (char i = 0; i < muuttujienlkm; i++) {
             vaihdettava = vaihdettava.replace("$" + (char) ('A' + i), muuttujat.get((char) ('A' + i)).toString());
         }
@@ -117,47 +115,51 @@ public class Logiikka {
             return vastaus;
         }
         format.setDecimalSeparatorAlwaysShown(false);
-        vastaus = laskija.laskin(vaihdaArvotMuuttujiin(vastaus));
+        vastaus = lasketaanVastaukset(vaihdaArvotMuuttujiin(vastaus));
+//        System.out.println(vastaus);
         return vastaus;
     }
 
     public String getLaajaVastausMuuttujilla() {
-        laajaVastaus = vaihdaArvotMuuttujiin(laajaVastaus);
-        laajaVastaus = muunnetaanLaajaVastaus();
-        return (laajaVastaus.trim());
+        laajaVastaus = lasketaanVastaukset(vaihdaArvotMuuttujiin(laajaVastaus));
+        this.laajaVastaus = laajaVastaus.trim();
+        return (laajaVastaus);
     }
 
-    public String muunnetaanLaajaVastaus() {
+    private String lasketaanVastaukset(String syote) {
         int alku = 0;
         int loppu = 0;
-        for (int i = 0; i < laajaVastaus.length(); i++) {
-            if (laajaVastaus.charAt(i) == '{') {
+        for (int i = 0; i < syote.length(); i++) {
+            if (syote.charAt(i) == '{') {
                 alku = i;
             }
-            if (laajaVastaus.charAt(i) == '}') {
+            if (syote.charAt(i) == '}') {
                 loppu = i;
             }
             if (loppu != 0) {
 //                System.out.println("substring on " + laajaVastaus.substring(alku + 1, loppu));
-//                System.out.println("laskettu lasku on " + laskin(laajaVastaus.substring(alku + 1, loppu)));
-                this.laajaVastaus = laajaVastaus.replaceFirst("\\{[0-9,\\-,\\*,\\/,\\+,\\.,\\%,\\(,\\)]*\\}",
-                        laskija.laskin(laajaVastaus.substring(alku + 1, loppu)));
+//                System.out.println("laskettu lasku on " + laskija.laskin(laajaVastaus.substring(alku + 1, loppu)));
+                syote = syote.replaceFirst("\\{[0-9,\\-,\\*,\\/,\\+,\\.,\\%,\\(,\\)]*\\}",
+                        laskija.laskin(syote.substring(alku + 1, loppu)));
                 loppu = 0;
 //                System.out.println("muutosten jälkeen laajaVastaus on " + laajaVastaus);
             }
         }
-        return laajaVastaus;
+        return syote;
     }
 
     public boolean tarkistaVastaus(String annettuvastaus) {
 //        System.out.println("Annettu vastaus on " + annettuvastaus);
-//        System.out.println("Oikea vastaus on " + getVastausMuuttujilla());
-        String vastausTrim = annettuvastaus.trim();
-        if (vastausTrim.equals(getVastausMuuttujilla().trim())) {
+//        System.out.println("Ohjelmaan tallennettu vastaus on " + getVastausMuuttujilla());
+//        System.out.println("Oikea vastaus on " + getVastausMuuttujilla().replaceAll("[[a-zA-ZäöåÄÖÅ ]]", "").trim());
+        String vastausTrim = annettuvastaus.trim().replaceAll("[[a-zA-ZäöåÄÖÅ ]]", "");
+        if (vastausTrim.equals(getVastausMuuttujilla().replaceAll("[[a-zA-ZäöåÄÖÅ ]]", "").trim())) {
+            if (!nykyiseenKysymykseenVastattu) {
             oikeatVastaukset++;
+            }
+            nykyiseenKysymykseenVastattu = true;
             return true;
         } else {
-            vaaratVastaukset++;
             return false;
         }
     }

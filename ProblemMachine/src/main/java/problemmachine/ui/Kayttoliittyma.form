@@ -165,6 +165,7 @@
         <Property name="toolTipText" type="java.lang.String" value="Anna vastaus enimmill&#xe4;&#xe4;n 2 desimaalin tarkkuudella."/>
       </Properties>
       <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextField1FocusGained"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
       </Events>
     </Component>
