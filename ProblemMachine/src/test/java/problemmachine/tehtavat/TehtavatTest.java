@@ -9,9 +9,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -38,15 +41,12 @@ public class TehtavatTest {
         testeri.lueTiedosto("kysymyksetMatematiikka.txt");
     }
 
-    /**
-     *
-     */
     @Test
     public void testValitseSattumanvarainenPainotettu() {
         int luku = randomi.nextInt(100);
         int muuttuja = testeri.valitseSattumanvarainenPainotettu(1);
         assertTrue(0 <= muuttuja && muuttuja <= 1);
-        testeri.valitseSattumanvarainenPainotettu(muuttuja)
+        testeri.valitseSattumanvarainenPainotettu(muuttuja);
         
     }
 
@@ -99,4 +99,5 @@ public class TehtavatTest {
         assertNotNull(testeri.getTehtavienLkmListalla());
 
     }
+
 }

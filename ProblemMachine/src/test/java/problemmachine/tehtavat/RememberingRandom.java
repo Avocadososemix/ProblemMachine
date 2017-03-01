@@ -16,7 +16,7 @@ public class RememberingRandom extends Random {
 
     private ArrayList<Double> doubleRandom;
     private ArrayList<Integer> intRandom;
-    
+
     /**
      *
      */
@@ -27,7 +27,8 @@ public class RememberingRandom extends Random {
 
     @Override
     public int nextInt(int bound) {
-        int lukuInt = super.nextInt(bound);
+//        int lukuInt = super.nextInt(bound);
+        int lukuInt = bound;
         intRandom.add(lukuInt);
         return lukuInt;
     }
@@ -54,11 +55,5 @@ public class RememberingRandom extends Random {
     public ArrayList<Integer> getIntRandom() {
         return intRandom;
     }
-    
-    
-    
-    
-   
-    
-    
+
 }

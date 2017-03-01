@@ -95,7 +95,7 @@ public class Logiikka {
      * @param tehtavaOsat String-jossa tallennettuna tehtävän kaikki osat
      * '|'-merkkien jakamana.
      */
-    private void paloitteleTehtava(String tehtavaOsat) {
+    public void paloitteleTehtava(String tehtavaOsat) {
         System.out.println(tehtavaOsat);
         String[] osat = tehtavaOsat.split("\\|");
         System.out.println("Tehtavien paloittelussa saatiin " + osat.length + "/4 osaa");
@@ -129,9 +129,10 @@ public class Logiikka {
      * @param osat String, joka sisältää arvovälin jolta arvotaan kirjaimilla
      * esitetyille muuttujille arvot.
      *
-     * @see problemmachine.logiikka.Satunnaisuus#laskeTn(int)
+     * @see problemmachine.logiikka.Satunnaisuus#annaSattumanvarainenInt(int, int)
+     * @see problemmachine.logiikka.Satunnaisuus#annaSattumanvarainenDouble(double, double)
      */
-    private void annetaanSattumanvaraiset(String[] osat) {
+    public void annetaanSattumanvaraiset(String[] osat) {
         IntVaiDouble[] kirjainmuuttujat = new IntVaiDouble[osat.length];
         for (int i = 0; i < osat.length; i++) {
             String[] minmax = osat[i].split("-");
@@ -178,7 +179,7 @@ public class Logiikka {
      *
      * @see problemmachine.logiikka.Logiikka#annetaanSattumanvaraiset(String[])
      */
-    private String vaihdaArvotMuuttujiin(String vaihdettava) {
+    public String vaihdaArvotMuuttujiin(String vaihdettava) {
         for (char i = 0; i < muuttujienlkm; i++) {
             vaihdettava = vaihdettava.replace("$" + (char) ('A' + i), muuttujat.get((char) ('A' + i)).toString());
         }
@@ -239,7 +240,7 @@ public class Logiikka {
      * kaarisuluin ympäröidyt laskut on laskettu ja niiden tulokset on asetettu
      * kyseisten laskujen tilalle.
      */
-    private String lasketaanVastaukset(String syote) {
+    public String lasketaanVastaukset(String syote) {
         int alku = 0;
         int loppu = 0;
         for (int i = 0; i < syote.length(); i++) {
@@ -291,6 +292,10 @@ public class Logiikka {
      */
     public String getPisteet() {
         return Integer.toString(oikeatVastaukset);
+    }
+    
+    public Tehtavat getTehtavat() {
+        return tehtava;
     }
 
 }

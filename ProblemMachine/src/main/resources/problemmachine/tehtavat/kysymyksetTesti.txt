@@ -1,0 +1,1 @@
+TestiKysymys? $A | TestiVastaus {$A+$B} | TestiMallivastaus $A+B$ = {$A+B$} | 1-1, 3-3

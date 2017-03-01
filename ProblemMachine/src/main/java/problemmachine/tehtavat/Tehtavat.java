@@ -56,6 +56,7 @@ public class Tehtavat {
      * @param lahdetiedosto Tiedoston nimi joka luetaan.
      */
     public void lueTiedosto(String lahdetiedosto) {
+        
         tehtavalista.clear();
         tehdytTehtavat.clear();
         InputStream inputti = getClass().getResourceAsStream(lahdetiedosto);

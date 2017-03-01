@@ -18,5 +18,8 @@ Päivä | Tunnit | Kuvaus
 23.02.2017 | 3h | Sain kaikki toiminnallisuudet toimimaan graafisessa käyttöliittymässä, ongelmana että en saa haettua tiedostoja muilla koneilla kuin omalla.
 24.02.2017 | 3h | Muutin luokkia, lisäsin Satunnaisuus-luokan kutistaakseni Logiikka-luokkaa. Koitin tehdä luokka-kaavion, mutta jouduin muuttamaan rakennetta joten se on vielä kesken.
 24.02.2017 | 1h | Laskin-luokka luotu jonne siirretty entisen laskin metodin toiminta.
+25.02.2017 | 3h | Selvitin mysteeriä miksi ohjelma ei toimi muilla kuin omalla koneella, sain ystävän tarkistamaan koodia ja muutin metodeja loogisemmiksi ja koodia paremmaksi ottaen huomioon ystävän ehdotukset.
+28.02.2017 | 6h | Kirjoitin valmiiksi kaiken javaDocin, sain apua checkstyle/pit-raportteja varten Kayttoliittyma-luokan poistoon testeistä. Lisää testejä.
+01.03.2017 | 
 ... | ... | ...
 
