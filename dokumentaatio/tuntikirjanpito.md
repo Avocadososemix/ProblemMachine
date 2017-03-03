@@ -21,5 +21,6 @@ Päivä | Tunnit | Kuvaus
 25.02.2017 | 3h | Selvitin mysteeriä miksi ohjelma ei toimi muilla kuin omalla koneella, sain ystävän tarkistamaan koodia ja muutin metodeja loogisemmiksi ja koodia paremmaksi ottaen huomioon ystävän ehdotukset.
 28.02.2017 | 6h | Kirjoitin valmiiksi kaiken javaDocin, sain apua checkstyle/pit-raportteja varten Kayttoliittyma-luokan poistoon testeistä. Lisää testejä.
 01.03.2017 | 3h | Erinäiset README:n tiedostot ja muu dokumentaatio kuntoon. Päivitin aiheenkuvausta yms.
+02.03.2017 | 4h | Viimeisten testien viimeistelyä, pit, checkstyle-raportit kunnossa, lopullinen versio luokka diagrammista valmis.
 ... | ... | ...
 
