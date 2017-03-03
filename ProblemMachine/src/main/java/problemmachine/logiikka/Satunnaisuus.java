@@ -6,6 +6,7 @@
 package problemmachine.logiikka;
 
 import java.text.DecimalFormat;
+import java.util.Random;
 
 /**
  *
@@ -13,11 +14,18 @@ import java.text.DecimalFormat;
  */
 public class Satunnaisuus {
 
+    private Random r;
+
     /**
-     * Konstruktorissa luodaan uusi Satunnaisuus luokka-olio.
+     * Konstruktorissa luodaan uusi Satunnaisuus luokka-olio, parametriksi
+     * voidaan antaa random-olio junit-testaamista varten
      */
     public Satunnaisuus() {
+        this(new Random());
+    }
 
+    public Satunnaisuus(Random r) {
+        this.r = r;
     }
 
     /**
@@ -33,7 +41,7 @@ public class Satunnaisuus {
      */
     public int annaSattumanvarainenInt(int min, int max) {
 //        System.out.println("Keksitään sattumanvarainen luku väliltä " + min + " ja " + max);
-        int randomLuku = min + (int) (Math.random() * ((max - min) + 1));
+        int randomLuku = r.nextInt(1+max-min) + min;
         return randomLuku;
     }
 
@@ -51,7 +59,7 @@ public class Satunnaisuus {
      */
     public double annaSattumanvarainenDouble(double min, double max) {
 //        System.out.println("Keksitään double luku arvoväliltä " + min + " ja " + max);
-        double randomLuku = min + (Math.random() * ((max - min) + 1));
+        double randomLuku = min + (max - min) * r.nextDouble();
         DecimalFormat format = new DecimalFormat("#.##");
         String formatoitu = format.format(randomLuku);
         formatoitu = formatoitu.replaceAll(",", ".");

@@ -98,7 +98,7 @@ public class Logiikka {
     public void paloitteleTehtava(String tehtavaOsat) {
         System.out.println(tehtavaOsat);
         String[] osat = tehtavaOsat.split("\\|");
-        System.out.println("Tehtavien paloittelussa saatiin " + osat.length + "/4 osaa");
+//        System.out.println("Tehtavien paloittelussa saatiin " + osat.length + "/4 osaa");
         kysymys = osat[0];
         vastaus = (osat[1]);
         laajaVastaus = osat[2];
@@ -123,14 +123,17 @@ public class Logiikka {
      * kahteen osaan. Antamalla nämä osat annaSattumanvarainenInt tai
      * -Double-luokille parametreinä, saadaan palautteena sattumanvarainen arvo
      * lukujen väliltä (mukaanlukien annetut arvot). Saadut arvot tallennetaan
-     * järjestyksessä kirjainmuuttujat hashMappiin, jossa aakkosellisesti
+     * järjestyksessä kirjainmuuttujat hashMappi in, jossa aakkosellisesti
      * kasvavat kirjaimet saavat järjestyksessä tässä arvotut arvot itseilleen.
      *
      * @param osat String, joka sisältää arvovälin jolta arvotaan kirjaimilla
      * esitetyille muuttujille arvot.
      *
-     * @see problemmachine.logiikka.Satunnaisuus#annaSattumanvarainenInt(int, int)
-     * @see problemmachine.logiikka.Satunnaisuus#annaSattumanvarainenDouble(double, double)
+     * @see problemmachine.logiikka.Satunnaisuus#annaSattumanvarainenInt(int,
+     * int)
+     * @see
+     * problemmachine.logiikka.Satunnaisuus#annaSattumanvarainenDouble(double,
+     * double)
      */
     public void annetaanSattumanvaraiset(String[] osat) {
         IntVaiDouble[] kirjainmuuttujat = new IntVaiDouble[osat.length];
@@ -197,6 +200,9 @@ public class Logiikka {
      * laskettu.
      */
     public String getVastausMuuttujilla() {
+        if (vastaus == null) {
+            return "Tälle tehtävälle ei ole vastausta";
+        }
         if (!vastaus.contains("$")) {
             return vastaus;
         }
@@ -218,6 +224,9 @@ public class Logiikka {
      * laskettu.
      */
     public String getLaajaVastausMuuttujilla() {
+        if (laajaVastaus == null) {
+            return "Tälle tehtävälle ei ole mallivastausta";
+        }
         laajaVastaus = lasketaanVastaukset(vaihdaArvotMuuttujiin(laajaVastaus));
         this.laajaVastaus = laajaVastaus.trim();
         return (laajaVastaus);
@@ -293,7 +302,7 @@ public class Logiikka {
     public String getPisteet() {
         return Integer.toString(oikeatVastaukset);
     }
-    
+
     public Tehtavat getTehtavat() {
         return tehtava;
     }

@@ -5,48 +5,42 @@
  */
 package problemmachine.logiikka;
 
+import java.text.DecimalFormat;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import problemmachine.tehtavat.RememberingRandom;
 
 /**
  *
  * @author lkaranko
  */
 public class SatunnaisuusTest {
-    
+
     private Satunnaisuus sattuma;
-    
-    /**
-     *
-     */
+    private RememberingRandom randomi;
+
     public SatunnaisuusTest() {
     }
-    
-    /**
-     *
-     */
+
     @Before
     public void setUp() {
-        sattuma = new Satunnaisuus();
+        randomi = new RememberingRandom();
+        sattuma = new Satunnaisuus(randomi);
     }
 
-    /**
-     *
-     */
     @Test
     public void testAnnaSattumanvarainenInt() {
-        assertTrue(sattuma.annaSattumanvarainenInt(1,1) == 1);
-        
+        assertEquals((Integer) sattuma.annaSattumanvarainenInt(0, 100),
+                randomi.getIntRandom().get(randomi.getIntRandom().size() - 1));
+
     }
 
-    /**
-     *
-     */
     @Test
     public void testAnnaSattumanvarainenDouble() {
-        assertTrue(1.0 == sattuma.annaSattumanvarainenDouble(1.0,1.0));
-        
+
+        assertEquals((Double) sattuma.annaSattumanvarainenDouble(0, 100),
+                randomi.getDoubleRandom().get(randomi.getDoubleRandom().size() - 1) * 100, 0.01);
     }
-    
+
 }

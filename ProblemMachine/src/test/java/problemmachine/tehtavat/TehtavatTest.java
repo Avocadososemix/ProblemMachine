@@ -9,12 +9,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.BeforeClass;
 
 /**
  *
@@ -22,18 +19,12 @@ import org.junit.BeforeClass;
  */
 public class TehtavatTest {
 
-    /**
-     *
-     */
     public TehtavatTest() {
     }
 
     private Tehtavat testeri;
     private RememberingRandom randomi;
 
-    /**
-     *
-     */
     @Before
     public void setUp() {
         randomi = new RememberingRandom();
@@ -43,16 +34,9 @@ public class TehtavatTest {
 
     @Test
     public void testValitseSattumanvarainenPainotettu() {
-        int luku = randomi.nextInt(100);
-        int muuttuja = testeri.valitseSattumanvarainenPainotettu(1);
-        assertTrue(0 <= muuttuja && muuttuja <= 1);
-        testeri.valitseSattumanvarainenPainotettu(muuttuja);
-        
+        assertEquals((Integer) testeri.valitseSattumanvarainenPainotettu(100), randomi.getIntRandom().get(randomi.getIntRandom().size()-1));  
     }
 
-    /**
-     *
-     */
     @Test
     public void testLueTiedosto() {
         List<String> tehtavalista = new ArrayList();
@@ -71,9 +55,6 @@ public class TehtavatTest {
 
     }
 
-    /**
-     *
-     */
     @Test
     public void testValitseTehtava() {
         String tehtava0 = "Sinulla on $A kenkää, montako muurahaista pystyt "
@@ -82,18 +63,12 @@ public class TehtavatTest {
         assertTrue(testeri.valitseTehtava(0).equals(tehtava0));
     }
 
-    /**
-     *
-     */
     @Test
     public void TestValitseSattumanvarainenTehtava() {
         assertFalse(testeri.valitseSattumanvarainenTehtava().isEmpty());
         assertTrue(testeri.valitseSattumanvarainenTehtava().getClass().equals(String.class));
     }
 
-    /**
-     *
-     */
     @Test
     public void TestGetTehtavienLkmListalla() {
         assertNotNull(testeri.getTehtavienLkmListalla());

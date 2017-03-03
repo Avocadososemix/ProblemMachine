@@ -27,8 +27,7 @@ public class RememberingRandom extends Random {
 
     @Override
     public int nextInt(int bound) {
-//        int lukuInt = super.nextInt(bound);
-        int lukuInt = bound;
+        int lukuInt = super.nextInt(bound);
         intRandom.add(lukuInt);
         return lukuInt;
     }

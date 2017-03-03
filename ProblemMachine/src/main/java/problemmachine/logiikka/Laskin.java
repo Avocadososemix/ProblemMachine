@@ -58,9 +58,9 @@ public class Laskin {
                 return palaute;
             }
         } catch (ScriptException | NumberFormatException e) {
-            System.out.println(e);
+            return "-Laskua ei laskettu-";
         }
-        return "";
+
     }
 
 }

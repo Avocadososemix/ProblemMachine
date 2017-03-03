@@ -18,13 +18,13 @@ import problemmachine.tehtavat.Tehtavat;
  * @author lkaranko
  */
 public class LogiikkaTest {
-    
+
     private Logiikka logic;
 
     public LogiikkaTest() {
-        
+
     }
-    
+
     @Before
     public void setUp() {
         logic = new Logiikka();
@@ -32,138 +32,96 @@ public class LogiikkaTest {
 
     @Test
     public void testKaynnista() {
-        logic.kaynnista("kysymyksetTesti");
+        assertEquals(logic.getTehtavat().getTehtavienLkmListalla(), 0);
+        logic.kaynnista("kysymyksetTesti.txt");
         assertNotNull(logic.getTehtavat().getTehtavienLkmListalla());
     }
 
-    /**
-     * Test of haeTehtava method, of class Logiikka.
-     */
     @Test
     public void testHaeTehtava() {
-        logic.kaynnista("kysymyksetTesti");
+        logic.kaynnista("kysymyksetTesti.txt");
         logic.haeTehtava();
-        
+        assertEquals(logic.getKysymysMuuttujilla(), "TestiKysymys? 1 ");
+
     }
 
-    /**
-     * Test of getKysymysMuuttujilla method, of class Logiikka.
-     */
     @Test
     public void testGetKysymysMuuttujilla() {
-        System.out.println("getKysymysMuuttujilla");
-        Logiikka instance = new Logiikka();
-        String expResult = "";
-        String result = instance.getKysymysMuuttujilla();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(logic.getKysymysMuuttujilla(), null);
+        logic.kaynnista("kysymyksetTesti.txt");
+        assertEquals(logic.getKysymysMuuttujilla(), null);
+        logic.haeTehtava();
+        assertEquals(logic.getKysymysMuuttujilla(), "TestiKysymys? 1 ");
     }
 
-    /**
-     * Test of getVastausMuuttujilla method, of class Logiikka.
-     */
     @Test
     public void testGetVastausMuuttujilla() {
-        System.out.println("getVastausMuuttujilla");
-        Logiikka instance = new Logiikka();
-        String expResult = "";
-        String result = instance.getVastausMuuttujilla();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(logic.getVastausMuuttujilla(), "Tälle tehtävälle ei ole vastausta");
+        logic.kaynnista("kysymyksetTesti.txt");
+        assertEquals(logic.getVastausMuuttujilla(), "Tälle tehtävälle ei ole vastausta");
+        logic.haeTehtava();
+        assertEquals(logic.getVastausMuuttujilla(), " TestiVastaus 4 ");
     }
 
-    /**
-     * Test of getLaajaVastausMuuttujilla method, of class Logiikka.
-     */
     @Test
     public void testGetLaajaVastausMuuttujilla() {
-        System.out.println("getLaajaVastausMuuttujilla");
-        Logiikka instance = new Logiikka();
-        String expResult = "";
-        String result = instance.getLaajaVastausMuuttujilla();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(logic.getLaajaVastausMuuttujilla(), "Tälle tehtävälle ei ole mallivastausta");
+        logic.kaynnista("kysymyksetTesti.txt");
+        assertEquals(logic.getLaajaVastausMuuttujilla(), "Tälle tehtävälle ei ole mallivastausta");
+        logic.haeTehtava();
+        assertEquals(logic.getLaajaVastausMuuttujilla(), "TestiMallivastaus 1+3 = 4");
     }
 
-    /**
-     * Test of tarkistaVastaus method, of class Logiikka.
-     */
     @Test
     public void testTarkistaVastaus() {
-        System.out.println("tarkistaVastaus");
-        String annettuvastaus = "";
-        Logiikka instance = new Logiikka();
-        boolean expResult = false;
-        boolean result = instance.tarkistaVastaus(annettuvastaus);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(logic.getVastausMuuttujilla(), "Tälle tehtävälle ei ole vastausta");
+        logic.kaynnista("kysymyksetTesti.txt");
+        assertEquals(logic.getVastausMuuttujilla(), "Tälle tehtävälle ei ole vastausta");
+        assertFalse(logic.tarkistaVastaus(" TestiVastaus 4 "));
+        logic.haeTehtava();
+        assertEquals(logic.getVastausMuuttujilla(), " TestiVastaus 4 ");
+        assertTrue(logic.tarkistaVastaus(" TestiVastaus 4 "));
     }
 
-    /**
-     * Test of getPisteet method, of class Logiikka.
-     */
     @Test
     public void testGetPisteet() {
-        System.out.println("getPisteet");
-        Logiikka instance = new Logiikka();
-        String expResult = "";
-        String result = instance.getPisteet();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(logic.getPisteet(), "0");
+        logic.kaynnista("kysymyksetTesti.txt");
+        logic.haeTehtava();
+        logic.tarkistaVastaus(" TestiVastaus 4 ");
+        assertEquals(logic.getPisteet(), "1");
     }
+//
+//    @Test
+//    public void testPaloitteleTehtava() {
+//        String sanoja = "nakki | takki | hattu|";
+//        logic.paloitteleTehtava(sanoja);
+//        
+//    }
 
-    /**
-     * Test of paloitteleTehtava method, of class Logiikka.
-     */
-    @Test
-    public void testPaloitteleTehtava() {
-        System.out.println("paloitteleTehtava");
-        String tehtavaOsat = "";
-        Logiikka instance = new Logiikka();
-        instance.paloitteleTehtava(tehtavaOsat);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    /**
+//     * Test of annetaanSattumanvaraiset method, of class Logiikka.
+//     */
+//    @Test
+//    public void testAnnetaanSattumanvaraiset() {
+//        System.out.println("annetaanSattumanvaraiset");
+//        String[] osat = null;
+//        Logiikka instance = new Logiikka();
+//        instance.annetaanSattumanvaraiset(osat);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 
-    /**
-     * Test of annetaanSattumanvaraiset method, of class Logiikka.
-     */
-    @Test
-    public void testAnnetaanSattumanvaraiset() {
-        System.out.println("annetaanSattumanvaraiset");
-        String[] osat = null;
-        Logiikka instance = new Logiikka();
-        instance.annetaanSattumanvaraiset(osat);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of vaihdaArvotMuuttujiin method, of class Logiikka.
-     */
     @Test
     public void testVaihdaArvotMuuttujiin() {
+        logic.kaynnista("KysymyksetTesti.txt");
+        logic.haeTehtava();
+        
         logic.vaihdaArvotMuuttujiin("$A $B");
     }
 
-    /**
-     * Test of lasketaanVastaukset method, of class Logiikka.
-     */
     @Test
     public void testLasketaanVastaukset() {
-        System.out.println("lasketaanVastaukset");
-        String syote = "";
-        Logiikka instance = new Logiikka();
-        String expResult = "";
-        String result = instance.lasketaanVastaukset(syote);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(logic.lasketaanVastaukset(" TestiMallivastaus 1+3 = {1+3} "), " TestiMallivastaus 1+3 = 4 ");
     }
-
 }
