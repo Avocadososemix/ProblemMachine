@@ -22,5 +22,6 @@ Päivä | Tunnit | Kuvaus
 28.02.2017 | 6h | Kirjoitin valmiiksi kaiken javaDocin, sain apua checkstyle/pit-raportteja varten Kayttoliittyma-luokan poistoon testeistä. Lisää testejä.
 01.03.2017 | 3h | Erinäiset README:n tiedostot ja muu dokumentaatio kuntoon. Päivitin aiheenkuvausta yms.
 02.03.2017 | 4h | Viimeisten testien viimeistelyä, pit, checkstyle-raportit kunnossa, lopullinen versio luokka diagrammista valmis.
+03.03.2017 | 2.5h | Kaikki on valmista. Ohjelma toimii .jar-tiedostona.
 ... | ... | ...
 

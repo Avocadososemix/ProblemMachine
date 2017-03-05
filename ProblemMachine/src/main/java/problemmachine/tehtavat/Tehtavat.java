@@ -79,7 +79,6 @@ public class Tehtavat {
      * tehtävän muuttujien arvovälit.
      */
     public String valitseSattumanvarainenTehtava() {
-//        System.out.println("Valitaan satunnainen tehtävä");
         return tehtavalista.get(valitseSattumanvarainenPainotettu(tehtavalista.size()));
     }
 
@@ -96,7 +95,6 @@ public class Tehtavat {
      * käyttämällä paratmerista saatua arvoa.
      */
     public String valitseTehtava(int tehtavanro) {
-//        System.out.println("Valitaan tehtävä " + tehtavanro);
         return tehtavalista.get(tehtavanro);
     }
 
@@ -113,7 +111,6 @@ public class Tehtavat {
      * väliltä.
      */
     public int valitseSattumanvarainenPainotettu(int max) {
-//        System.out.println("Arvotaan luku satunnaisen tehävän valitsemista varten. Int max on " + max);
         int randomLuku = r.nextInt(max);
         if (tehdytTehtavat.contains(randomLuku) && tehdytTehtavat.size() != tehtavalista.size()) {
             //tässä pienennetään todennäköisyyttä että saadaan uudestaan jo tehty tehtävä.

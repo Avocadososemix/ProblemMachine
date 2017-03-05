@@ -29,7 +29,7 @@ public class TehtavatTest {
     public void setUp() {
         randomi = new RememberingRandom();
         testeri = new Tehtavat(randomi);
-        testeri.lueTiedosto("kysymyksetMatematiikka.txt");
+        testeri.lueTiedosto("kysymyksetTesti.txt");
     }
 
     @Test
@@ -41,7 +41,7 @@ public class TehtavatTest {
     public void testLueTiedosto() {
         List<String> tehtavalista = new ArrayList();
         int rivit = 0;
-        String lahdetiedosto = "kysymyksetMatematiikka.txt";
+        String lahdetiedosto = "kysymyksetTesti.txt";
         InputStream inputti = getClass().getResourceAsStream(lahdetiedosto);
         Scanner lukija = new Scanner(inputti);
         while (lukija.hasNextLine()) {
@@ -57,9 +57,8 @@ public class TehtavatTest {
 
     @Test
     public void testValitseTehtava() {
-        String tehtava0 = "Sinulla on $A kenkää, montako muurahaista pystyt "
-                + "kengittämään? | {($A-($A%6))/6} murkkua | Muurahaisella on 3 "
-                + "jalkaparia, joten vastaus saadaan jakamalla kenkien lukumäärä kuudella. | 12-1300";
+        String tehtava0 = "TestiKysymys? $A | TestiVastaus {$A*$B} | "
+                + "TestiMallivastaus $A*$B = {$A*$B} | 2-2, 3.0-3.0";
         assertTrue(testeri.valitseTehtava(0).equals(tehtava0));
     }
 
@@ -67,12 +66,14 @@ public class TehtavatTest {
     public void TestValitseSattumanvarainenTehtava() {
         assertFalse(testeri.valitseSattumanvarainenTehtava().isEmpty());
         assertTrue(testeri.valitseSattumanvarainenTehtava().getClass().equals(String.class));
+        assertEquals(testeri.valitseSattumanvarainenTehtava(),"TestiKysymys? $A "
+                + "| TestiVastaus {$A*$B} | TestiMallivastaus $A*$B = {$A*$B} | 2-2, 3.0-3.0");
     }
 
     @Test
     public void TestGetTehtavienLkmListalla() {
         assertNotNull(testeri.getTehtavienLkmListalla());
-
+        assertEquals(testeri.getTehtavienLkmListalla(),1);
     }
 
 }

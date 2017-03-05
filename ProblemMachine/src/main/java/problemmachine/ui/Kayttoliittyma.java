@@ -13,6 +13,8 @@ import problemmachine.logiikka.Logiikka;
  */
 public class Kayttoliittyma extends javax.swing.JFrame {
 
+    private boolean onkoAlustettu;
+
     /**
      * Luodaan uusi Logiikka-luokkaolio, jota käytetään luokan alustamisessa kun
      * tätä kutsutaan käyttöliittymän konstruktorissa.
@@ -22,11 +24,12 @@ public class Kayttoliittyma extends javax.swing.JFrame {
     /**
      * Metodissa alustetaan käyttöliittymä, joka alustaa uuden logiikka.luokan
      * ilmentymän.
-     * 
+     *
      * @param logic Logiikka-luokan ilmentymä jolla alustetaan Logiikka-luokka.
      */
     public Kayttoliittyma(Logiikka logic) {
         this.logic = logic;
+        onkoAlustettu = false;
         initComponents();
     }
 
@@ -213,8 +216,10 @@ public class Kayttoliittyma extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void uusiKysymysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uusiKysymysActionPerformed
-        logic.haeTehtava();
-        jTextArea1.setText(logic.getKysymysMuuttujilla());
+        if (onkoAlustettu) {
+            logic.haeTehtava();
+            jTextArea1.setText(logic.getKysymysMuuttujilla());
+        }
     }//GEN-LAST:event_uusiKysymysActionPerformed
 
     private void palautaVastausActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_palautaVastausActionPerformed
@@ -226,24 +231,28 @@ public class Kayttoliittyma extends javax.swing.JFrame {
     }//GEN-LAST:event_palautaMalliVastausActionPerformed
 
     private void vastauksenLukintaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vastauksenLukintaActionPerformed
-        if (logic.tarkistaVastaus(jTextField1.getText())) {
-            jTextField1.setText("Oikein!");
-            jLabel3.setText(logic.getPisteet());
-            jTextArea2.setText(logic.getLaajaVastausMuuttujilla());
-        } else {
-            jTextField1.setText("Väärin!");
+        if (onkoAlustettu) {
+            if (logic.tarkistaVastaus(jTextField1.getText())) {
+                jTextField1.setText("Oikein!");
+                jLabel3.setText(logic.getPisteet());
+                jTextArea2.setText(logic.getLaajaVastausMuuttujilla());
+            } else {
+                jTextField1.setText("Väärin!");
+            }
         }
     }//GEN-LAST:event_vastauksenLukintaActionPerformed
 
     private void kemiaNappiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kemiaNappiActionPerformed
         logic.kaynnista("kysymyksetKemia.txt");
         logic.haeTehtava();
+        onkoAlustettu = true;
         jTextArea1.setText(logic.getKysymysMuuttujilla());
     }//GEN-LAST:event_kemiaNappiActionPerformed
 
     private void fysiikkaNappiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fysiikkaNappiActionPerformed
         logic.kaynnista("kysymyksetFysiikka.txt");
         logic.haeTehtava();
+        onkoAlustettu = true;
         jTextArea1.setText(logic.getKysymysMuuttujilla());
     }//GEN-LAST:event_fysiikkaNappiActionPerformed
 
@@ -251,6 +260,7 @@ public class Kayttoliittyma extends javax.swing.JFrame {
 
         logic.kaynnista("kysymyksetMatematiikka.txt");
         logic.haeTehtava();
+        onkoAlustettu = true;
         jTextArea1.setText(logic.getKysymysMuuttujilla());
     }//GEN-LAST:event_matematiikkaNappiActionPerformed
 

@@ -11,3 +11,12 @@ Kaikkien käyttäjien käytettävissä olevat toiminnoit:
 - Pyydä oikea vastaus Problem Machine:lta
 - Pyydä mallivastaus Problem Machine:lta
 - Vastaa tehtävään ja saa varmistus oliko oma vastaus oikein.
+
+UML ja Sekvenssikaaviot:
+
+![Luokka-kaavio](/UML-kaaviot ja SekvenssiKaaviot/ihanaUML.png)
+![MalliVastauksen hakeminen](/UML-kaaviot ja SekvenssiKaaviot/MalliVastaus.png)
+![Tehtävän hakeminen](/UML-kaaviot ja SekvenssiKaaviot/Problemmachine 1.png)
+
+
+Ovat myös omassa kansiossa.

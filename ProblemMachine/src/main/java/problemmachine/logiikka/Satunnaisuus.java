@@ -40,7 +40,6 @@ public class Satunnaisuus {
      * parametrien väliltä mukaan lukien parametrien arvot.
      */
     public int annaSattumanvarainenInt(int min, int max) {
-//        System.out.println("Keksitään sattumanvarainen luku väliltä " + min + " ja " + max);
         int randomLuku = r.nextInt(1+max-min) + min;
         return randomLuku;
     }
@@ -58,7 +57,6 @@ public class Satunnaisuus {
      * parametrien väliltä mukaan lukien parametrien arvot.
      */
     public double annaSattumanvarainenDouble(double min, double max) {
-//        System.out.println("Keksitään double luku arvoväliltä " + min + " ja " + max);
         double randomLuku = min + (max - min) * r.nextDouble();
         DecimalFormat format = new DecimalFormat("#.##");
         String formatoitu = format.format(randomLuku);

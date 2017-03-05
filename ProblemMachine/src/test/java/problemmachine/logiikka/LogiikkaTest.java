@@ -5,13 +5,9 @@
  */
 package problemmachine.logiikka;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import problemmachine.tehtavat.Tehtavat;
 
 /**
  *
@@ -41,7 +37,7 @@ public class LogiikkaTest {
     public void testHaeTehtava() {
         logic.kaynnista("kysymyksetTesti.txt");
         logic.haeTehtava();
-        assertEquals(logic.getKysymysMuuttujilla(), "TestiKysymys? 1 ");
+        assertEquals(logic.getKysymysMuuttujilla(), "TestiKysymys? 2 ");
 
     }
 
@@ -51,36 +47,36 @@ public class LogiikkaTest {
         logic.kaynnista("kysymyksetTesti.txt");
         assertEquals(logic.getKysymysMuuttujilla(), null);
         logic.haeTehtava();
-        assertEquals(logic.getKysymysMuuttujilla(), "TestiKysymys? 1 ");
+        assertEquals(logic.getKysymysMuuttujilla(), "TestiKysymys? 2 ");
     }
 
     @Test
     public void testGetVastausMuuttujilla() {
-        assertEquals(logic.getVastausMuuttujilla(), "Tälle tehtävälle ei ole vastausta");
+        assertEquals(logic.getVastausMuuttujilla(), "Valitse ensin kysymyssarja :)");
         logic.kaynnista("kysymyksetTesti.txt");
-        assertEquals(logic.getVastausMuuttujilla(), "Tälle tehtävälle ei ole vastausta");
+        assertEquals(logic.getVastausMuuttujilla(), "Valitse ensin kysymyssarja :)");
         logic.haeTehtava();
-        assertEquals(logic.getVastausMuuttujilla(), " TestiVastaus 4 ");
+        assertEquals(logic.getVastausMuuttujilla(), " TestiVastaus 6 ");
     }
 
     @Test
     public void testGetLaajaVastausMuuttujilla() {
-        assertEquals(logic.getLaajaVastausMuuttujilla(), "Tälle tehtävälle ei ole mallivastausta");
+        assertEquals(logic.getLaajaVastausMuuttujilla(), "Valitse ensin kysymyssarja :)");
         logic.kaynnista("kysymyksetTesti.txt");
-        assertEquals(logic.getLaajaVastausMuuttujilla(), "Tälle tehtävälle ei ole mallivastausta");
+        assertEquals(logic.getLaajaVastausMuuttujilla(), "Valitse ensin kysymyssarja :)");
         logic.haeTehtava();
-        assertEquals(logic.getLaajaVastausMuuttujilla(), "TestiMallivastaus 1+3 = 4");
+        assertEquals(logic.getLaajaVastausMuuttujilla(), "TestiMallivastaus 2*3.0 = 6");
     }
 
     @Test
     public void testTarkistaVastaus() {
-        assertEquals(logic.getVastausMuuttujilla(), "Tälle tehtävälle ei ole vastausta");
+        assertEquals(logic.getVastausMuuttujilla(), "Valitse ensin kysymyssarja :)");
         logic.kaynnista("kysymyksetTesti.txt");
-        assertEquals(logic.getVastausMuuttujilla(), "Tälle tehtävälle ei ole vastausta");
-        assertFalse(logic.tarkistaVastaus(" TestiVastaus 4 "));
+        assertEquals(logic.getVastausMuuttujilla(), "Valitse ensin kysymyssarja :)");
+        assertFalse(logic.tarkistaVastaus(" TestiVastaus 6 "));
         logic.haeTehtava();
-        assertEquals(logic.getVastausMuuttujilla(), " TestiVastaus 4 ");
-        assertTrue(logic.tarkistaVastaus(" TestiVastaus 4 "));
+        assertEquals(logic.getVastausMuuttujilla(), " TestiVastaus 6 ");
+        assertTrue(logic.tarkistaVastaus(" TestiVastaus 6 "));
     }
 
     @Test
@@ -88,40 +84,46 @@ public class LogiikkaTest {
         assertEquals(logic.getPisteet(), "0");
         logic.kaynnista("kysymyksetTesti.txt");
         logic.haeTehtava();
-        logic.tarkistaVastaus(" TestiVastaus 4 ");
+        logic.tarkistaVastaus(" TestiVastaus 6 ");
         assertEquals(logic.getPisteet(), "1");
     }
-//
-//    @Test
-//    public void testPaloitteleTehtava() {
-//        String sanoja = "nakki | takki | hattu|";
-//        logic.paloitteleTehtava(sanoja);
-//        
-//    }
 
-//    /**
-//     * Test of annetaanSattumanvaraiset method, of class Logiikka.
-//     */
-//    @Test
-//    public void testAnnetaanSattumanvaraiset() {
-//        System.out.println("annetaanSattumanvaraiset");
-//        String[] osat = null;
-//        Logiikka instance = new Logiikka();
-//        instance.annetaanSattumanvaraiset(osat);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testPaloitteleTehtava() {
+        assertEquals(logic.getLaajaVastausMuuttujilla(), "Valitse ensin kysymyssarja :)");
+        assertEquals(logic.getKysymysMuuttujilla(), null);
+        assertEquals(logic.getVastausMuuttujilla(), "Valitse ensin kysymyssarja :)");
+        logic.kaynnista("kysymyksetTesti.txt");
+        assertEquals(logic.getLaajaVastausMuuttujilla(), "Valitse ensin kysymyssarja :)");
+        assertEquals(logic.getKysymysMuuttujilla(), null);
+        assertEquals(logic.getVastausMuuttujilla(), "Valitse ensin kysymyssarja :)");
+        logic.haeTehtava();
+        assertEquals(logic.getVastausMuuttujilla(), " TestiVastaus 6 ");
+        assertEquals(logic.getLaajaVastausMuuttujilla(), "TestiMallivastaus 2*3.0 = 6");
+        assertEquals(logic.getKysymysMuuttujilla(), "TestiKysymys? 2 ");
+
+    }
+
+    @Test
+    public void testAnnetaanSattumanvaraiset() {
+        assertEquals(logic.getLaajaVastausMuuttujilla(), "Valitse ensin kysymyssarja :)");
+        logic.kaynnista("kysymyksetTesti.txt");
+        assertEquals(logic.getLaajaVastausMuuttujilla(), "Valitse ensin kysymyssarja :)");
+        logic.haeTehtava();
+        assertEquals(logic.getLaajaVastausMuuttujilla(), "TestiMallivastaus 2*3.0 = 6");
+    }
 
     @Test
     public void testVaihdaArvotMuuttujiin() {
-        logic.kaynnista("KysymyksetTesti.txt");
+        assertEquals(logic.getKysymysMuuttujilla(), null);
+        logic.kaynnista("kysymyksetTesti.txt");
+        assertEquals(logic.getKysymysMuuttujilla(), null);
         logic.haeTehtava();
-        
-        logic.vaihdaArvotMuuttujiin("$A $B");
+        assertEquals(logic.getKysymysMuuttujilla(), "TestiKysymys? 2 ");
     }
 
     @Test
     public void testLasketaanVastaukset() {
-        assertEquals(logic.lasketaanVastaukset(" TestiMallivastaus 1+3 = {1+3} "), " TestiMallivastaus 1+3 = 4 ");
+        assertEquals(logic.lasketaanVastaukset(" TestiMallivastaus 2*3.0 = {2*3.0} "), " TestiMallivastaus 2*3.0 = 6 ");
     }
 }

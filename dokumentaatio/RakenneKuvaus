@@ -1,0 +1,25 @@
+Problem Machinen luookat. Luokkien toiminnasta lisää itse ohjelman javadocissa, joka on hyvin kattava metodien suhteen.
+
+Käyttöliittymä
+
+Sisältää ohjelman käyttöliittymän, joka on valmistettu Netbeanssin omalla Designerilla. Käyttöliittymä lataa Logiiikka-luokan ensimmäistä kertaa, joka ohjaa kaikkea toiminnallisuutta paitsi käyttäjän antamia käskyjä.
+
+Logiikka
+
+Antaa komennot muille luokille koskien mitä toimintoja tulee suorittaa milläkin hetkellä. Sisältää suurimman osan ohjelman toiminnallisuudesta joka ei kuulu laskimelle tai Satunnaisuus-luokille. Logiikka-luokkaan on myös tallennettuna kaikki String-muuttujat joita ohjelma käyttää tietyn tarkasteltavan tehtävän aikana. Logiikka-luokka käsittelee "raa'an" tehtävä-stringin, josta se erittelee tehtävän kysymyksen, vastauksen, mallivastauksen sekä muuttujien arvot, sekä tallentaa kaikki nämä omiin muuttujiinsa kun nämä on ensin käsitelty luokan metodeilla.
+
+IntVaiDouble
+
+Tarkastaa onko sille annetut numerot int vai double-muotoa, ja sallii molempien tallentamisen itseensä.
+
+Laskin
+
+Kykenee laskemaan sille annetut matemaatiiset laskut joita esiintyy tehtävätekstissä. Laskujen tulokset palautetaan tehtäväteksteihin samoihin kohtiin missä laskut olivat käyttäen regexiä ja replace-metodia Logiikassa.
+
+Satunnaisuus
+
+Satunnaisuus-luokka sisältää int ja double-lukujen generointiin metodit. Voidaan kehittää numeroita kahden arvon väliltä.
+
+Tehtavat
+
+Tehtävät-luokka lataa tehtävä-tiedoston, josta poimitaan ohjelman eri tehtävät. Aina kun halutaan ladata uudet tehtävät, tehtävät-luokka lataa uuden tiedoston josta tämä saa tehtävät. Tehtävät-luokka myös palauttaa satunnaiset tehtävä-stringit Logiikan käytettäviksi.
